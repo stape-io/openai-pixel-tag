@@ -51,7 +51,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "NON_EMPTY"
           }
         ],
-        "help": "Add your OpenAI Pixel ID from your add account. Currently, only one Pixel ID is supported on the page.",
+        "help": "Add your OpenAI Pixel ID from your ad account. Currently, only one Pixel ID is supported on the page.",
         "alwaysInSummary": true
       },
       {

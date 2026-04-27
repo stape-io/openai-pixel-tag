@@ -1,7 +1,7 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/openai-pixel-tag'
 versions:
-  - sha: 0f91de8b1fb5747992c11b0af5a3f644c76b37dc
+  - sha: cbeebadf34ad36a353df35afad8a5741f4e27923
     changeNotes: Update automapping help text.
   - sha: b4489dcf5aa1e0cc52c85a11646d6e324c0610e0
     changeNotes: Initial release.
