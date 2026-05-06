@@ -171,9 +171,9 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "CHECKBOX",
         "name": "enableDataLayerMapping",
-        "checkboxText": "Enable automatic Event Parameters mapping from the Data Layer",
+        "checkboxText": "Enable automatic User Data and Event Parameters mapping from the Data Layer",
         "simpleValueType": true,
-        "help": "If enabled, the tag will map standard Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e: GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n or  UA \u003ci\u003eecommerce[action].products[].id\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
+        "help": "If enabled, the tag will map standard User Data and Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e: GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n or  UA \u003ci\u003eecommerce[action].products[].id\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\n\u003cb\u003eUser Data\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eEmail Address\u003c/b\u003e: \u003ci\u003eemail\u003c/i\u003e, \u003ci\u003esha256_email_address\u003c/i\u003e, \u003ci\u003eemail_sha256\u003c/i\u003e, \u003ci\u003eemail_address\u003c/i\u003e, \u003ci\u003eemail\u003c/i\u003e or \u003ci\u003eem\u003c/i\u003e keys from  \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003ePhone Number\u003c/b\u003e: \u003ci\u003ephone\u003c/i\u003e, \u003ci\u003esha256_phone_number\u003c/i\u003e, \u003ci\u003ephone_number_sha256\u003c/i\u003e, \u003ci\u003ephone_number\u003c/i\u003e or \u003ci\u003eph\u003c/i\u003e keys from  \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eExternal ID / External ID SHA256 Hashed\u003c/b\u003e: \u003ci\u003euser_id\u003c/i\u003e, \u003ci\u003euserId\u003c/i\u003e, \u003ci\u003eexternal_id\u003c/i\u003e or \u003ci\u003eexternal_id_sha256\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCity\u003c/b\u003e: \u003ci\u003ecity\u003c/i\u003e, \u003ci\u003ect\u003c/i\u003e, \u003ci\u003ecity_sha256\u003c/i\u003e, \u003ci\u003eaddress.city\u003c/i\u003e or \u003ci\u003eaddress[0].city\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eZIP Code\u003c/b\u003e: \u003ci\u003ezip\u003c/i\u003e, \u003ci\u003epostal_code\u003c/i\u003e, \u003ci\u003ezp\u003c/i\u003e, \u003ci\u003ezip_code_sha256\u003c/i\u003e, \u003ci\u003eaddress.postal_code\u003c/i\u003e, \u003ci\u003eaddress[0].postal_code\u003c/i\u003e, \u003ci\u003eaddress.zip\u003c/i\u003e or \u003ci\u003eaddress[0].zip\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCountry\u003c/b\u003e: \u003ci\u003ecountry\u003c/i\u003e, \u003ci\u003ecountry_sha256\u003c/i\u003e, \u003ci\u003eaddress.country\u003c/i\u003e, or \u003ci\u003eaddress[0].country\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
         "defaultValue": true,
         "subParams": [
           {
@@ -192,6 +192,47 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
+        "alwaysInSummary": true
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "enableAdvancedMatching",
+        "checkboxText": "Enable Advanced Matching",
+        "simpleValueType": true,
+        "help": "Advanced Matching helps you optimize your ads and drive performance by matching User Data with people on OpenAI platforms. Hashed User Data can be shared with any event to attribute more conversions, build bigger audiences and improve campaign optimization.",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "enableEventUserDataEnhancement",
+            "checkboxText": "Enable Event User Data Enhancement",
+            "simpleValueType": true,
+            "help": "Enable the use of \u003ci\u003elocalStorage\u003c/i\u003e to store data for enhanced User Data tracking.\n\u003cbr/\u003e\u003cbr/\u003e\nNote: If the \u003ci\u003eEnable automatic data population from the Data Layer\u003c/i\u003e option is selected, all User Data found in the Data Layer will be stored, not just the fields explicitly defined in the User Data section.\n\u003cbr/\u003e\u003cbr/\u003e\nThis feature is a convenience and is not part of the default Pixel behavior. It\u0027s integrated with the \u003ci\u003eConsent Settings\u003c/i\u003e below.",
+            "subParams": [
+              {
+                "type": "CHECKBOX",
+                "name": "storeUserDataHashed",
+                "checkboxText": "Store User Data hashed",
+                "simpleValueType": true,
+                "help": "The User Data will be stored hashed in \u003ci\u003elocalStorage\u003c/i\u003e.",
+                "enablingConditions": [
+                  {
+                    "paramName": "enableEventUserDataEnhancement",
+                    "paramValue": true,
+                    "type": "EQUALS"
+                  }
+                ]
+              }
+            ],
+            "enablingConditions": [
+              {
+                "paramName": "enableAdvancedMatching",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ],
+        "defaultValue": true,
         "alwaysInSummary": true
       }
     ]
@@ -233,6 +274,104 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Enable Google Consent Mode support",
         "simpleValueType": true,
         "help": "When enabled, this tag checks for the Google Consent Mode \u003ci\u003ead_storage\u003c/i\u003e consent. \n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003ci\u003ead_storage\u003c/i\u003e consent is \u003cb\u003edenied\u003c/b\u003e, the tag will not load the JS SDK, and it will prevent events from being sent until user consent is explicitly granted. After consent is \u003cb\u003egranted\u003c/b\u003e on the page, the JS SDK will load and events that were previously queued in the page before consent was granted will be sent.\n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003ci\u003ead_storage\u003c/i\u003e consent is \u003cb\u003egranted\u003c/b\u003e (initially or later), the tag will load the JS SDK and send events."
+      }
+    ]
+  },
+  {
+    "displayName": "User Data",
+    "name": "userDataGroup",
+    "groupStyle": "ZIPPY_OPEN_ON_PARAM",
+    "type": "GROUP",
+    "subParams": [
+      {
+        "type": "LABEL",
+        "name": "userDataLabel",
+        "displayName": "The tag will automatically hash parameters that need it, pre-hashed data is also accepted.\n\u003cbr/\u003e\u003cbr/\u003e"
+      },
+      {
+        "type": "SELECT",
+        "name": "userDataFromVariable",
+        "displayName": "Load Parameters From Variable",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": false,
+            "displayValue": "False"
+          }
+        ],
+        "simpleValueType": true,
+        "help": "You can use a standard User-Provided Data variable or create a variable that returns a JavaScript object containing the desired User Data parameters. This object will merge with additional parameters from the table below, with any conflicts resolved in favor of the table entries."
+      },
+      {
+        "name": "userDataList",
+        "simpleTableColumns": [
+          {
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ],
+            "displayName": "Parameter Name",
+            "name": "name",
+            "isUnique": true,
+            "type": "SELECT",
+            "selectItems": [
+              {
+                "value": "email_sha256",
+                "displayValue": "Email Address"
+              },
+              {
+                "value": "phone_number_sha256",
+                "displayValue": "Phone Number"
+              },
+              {
+                "value": "external_id",
+                "displayValue": "External ID"
+              },
+              {
+                "value": "external_id_sha256",
+                "displayValue": "External ID (SHA256 Hashed)"
+              },
+              {
+                "value": "city_sha256",
+                "displayValue": "City"
+              },
+              {
+                "value": "zip_code_sha256",
+                "displayValue": "ZIP Code"
+              },
+              {
+                "value": "country_sha256",
+                "displayValue": "Country"
+              },
+              {
+                "value": "ip_address",
+                "displayValue": "IP Address"
+              },
+              {
+                "value": "user_agent",
+                "displayValue": "User Agent"
+              }
+            ],
+            "defaultValue": ""
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Parameter Value",
+            "name": "value",
+            "type": "TEXT",
+            "valueValidators": []
+          }
+        ],
+        "type": "SIMPLE_TABLE",
+        "newRowButtonText": "Add parameter"
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "enableAdvancedMatching",
+        "paramValue": true,
+        "type": "EQUALS"
       }
     ]
   },
@@ -476,7 +615,9 @@ function getOrCreateQueue() {
 }
 
 function sendEvent(data, isManualOrGCMConsentGranted) {
+  const userData = getUserData(data, isManualOrGCMConsentGranted);
   const initData = { pixelId: data.pixelId, debug: data.debugEnabled };
+  if (objHasProps(userData)) initData.user = userData;
   runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
     const queue = getOrCreateQueue();
     queue('init', initData);
@@ -531,6 +672,39 @@ function getEventNameInfo(data) {
     : { eventName: 'custom', customEventName: data.eventNameCustom };
 }
 
+function getUserData(data, isManualOrGCMConsentGranted) {
+  if (!data.enableAdvancedMatching) return;
+
+  let userData = {};
+
+  if (data.enableEventUserDataEnhancement) {
+    userData = getEventUserDataEnhancement(isManualOrGCMConsentGranted);
+  }
+
+  if (data.enableDataLayerMapping) {
+    const userDataFromDataLayer = copyFromDataLayerWithVersion('user_data');
+    if (getType(userDataFromDataLayer) === 'object') {
+      addUserData(userData, userDataFromDataLayer, true);
+    }
+  }
+
+  if (getType(data.userDataFromVariable) === 'object') {
+    addUserData(userData, data.userDataFromVariable, false);
+  }
+
+  if (data.userDataList && data.userDataList.length) {
+    assign(userData, makeTableMap(data.userDataList, 'name', 'value'));
+  }
+
+  if (objIsEmptyOrContainsOnlyFalsyValues(userData)) return;
+
+  if (data.enableEventUserDataEnhancement) {
+    storeEventUserDataEnhancement(data, isManualOrGCMConsentGranted, userData);
+  }
+
+  return userData;
+}
+
 function getEventParametersType(eventName) {
   const eventParametersTypeMap = {
     custom: 'custom',
@@ -578,6 +752,105 @@ function getEventParameters(data, eventName) {
   return eventParameters;
 }
 
+function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
+  if (!isManualOrGCMConsentGranted || !localStorage) return {};
+
+  const gtmeec = localStorage.getItem('gtmeec-oa');
+  if (gtmeec) {
+    const gtmeecParsed = JSON.parse(gtmeec);
+    if (getType(gtmeecParsed) === 'object') return gtmeecParsed;
+  }
+
+  return {};
+}
+
+function normalizeBasedOnSchemaKey(schemaKey, identifier) {
+  if (schemaKey === 'phone_number_sha256') return normalizePhoneNumber(identifier);
+  else if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
+  else if (
+    schemaKey === 'country_sha256' ||
+    schemaKey === 'city_sha256' ||
+    schemaKey === 'zip_code_sha256'
+  ) {
+    return removeWhiteSpace(lowerCase(identifier));
+  } else if (
+    schemaKey === 'external_id_sha256' ||
+    schemaKey === 'external_id' ||
+    schemaKey === 'ip_address' ||
+    schemaKey === 'user_agent'
+  ) {
+    return trim(identifier);
+  } else return identifier;
+}
+
+function hashUserDataFields(userData, storeUserDataInLocalStorage) {
+  const canUseHashSync = getType(copyFromWindow('dataTag256')) === 'function';
+  const hashAsyncHelpers = {
+    pendingHashes: 0,
+    maybeFinish: (userDataHashed) => {
+      if (hashAsyncHelpers.pendingHashes === 0) storeUserDataInLocalStorage(userDataHashed);
+    }
+  };
+
+  const userDataHashed = {};
+
+  const fieldNames = Object.keys(userData);
+  fieldNames.forEach((fieldName) => {
+    const value = userData[fieldName];
+
+    if (value === undefined || value === null || value === '') return;
+    if (isHashed(value)) {
+      userDataHashed[fieldName] = value;
+      return;
+    }
+
+    const normalizedValue = makeString(normalizeBasedOnSchemaKey(fieldName, value))
+      .toLowerCase()
+      .trim();
+    if (canUseHashSync)
+      userDataHashed[fieldName] = callInWindow('dataTag256', normalizedValue, 'HEX');
+    else {
+      hashAsyncHelpers.pendingHashes++;
+      sha256(
+        normalizedValue,
+        (digest) => {
+          userDataHashed[fieldName] = digest;
+          hashAsyncHelpers.pendingHashes--;
+          hashAsyncHelpers.maybeFinish(userDataHashed);
+        },
+        () => {
+          userDataHashed[fieldName] = undefined;
+          hashAsyncHelpers.pendingHashes--;
+          hashAsyncHelpers.maybeFinish(userDataHashed);
+        },
+        { outputEncoding: 'hex' }
+      );
+    }
+  });
+
+  if (canUseHashSync) {
+    storeUserDataInLocalStorage(userDataHashed);
+    return userDataHashed;
+  } else {
+    hashAsyncHelpers.maybeFinish(userDataHashed);
+    return;
+  }
+}
+
+function storeUserDataInLocalStorage(userData) {
+  if (!localStorage || !objHasProps(userData)) return;
+
+  const gtmeec = JSON.stringify(userData);
+  localStorage.setItem('gtmeec-oa', gtmeec);
+}
+
+function storeEventUserDataEnhancement(data, isManualOrGCMConsentGranted, userData) {
+  if (!isManualOrGCMConsentGranted || !localStorage || !objHasProps(userData)) return;
+
+  if (!data.storeUserDataHashed) storeUserDataInLocalStorage(userData);
+  else hashUserDataFields(userData, storeUserDataInLocalStorage);
+}
+
 function pushEventIdToDataLayer(data) {
   if (!data.pushEventIdToDataLayer) return;
 
@@ -587,6 +860,74 @@ function pushEventIdToDataLayer(data) {
     eventId: data.eventId,
     event: data.eventIdDataLayerEventName || 'openAIPixelDataLayerPush'
   });
+}
+
+function addUserData(userData, userDataFrom, useDL) {
+  let email =
+    userDataFrom.email ||
+    userDataFrom.email_address ||
+    userDataFrom.em ||
+    userDataFrom.sha256_email_address ||
+    userDataFrom.email_sha256;
+  const emailType = getType(email);
+  if (emailType === 'array' || emailType === 'object') email = email[0];
+  if (email) userData.email_sha256 = email;
+
+  let phone =
+    userDataFrom.phone ||
+    userDataFrom.phone_number ||
+    userDataFrom.ph ||
+    userDataFrom.sha256_phone_number ||
+    userDataFrom.phone_number_sha256;
+  const phoneType = getType(phone);
+  if (phoneType === 'array' || phoneType === 'object') phone = phone[0];
+  if (phone) userData.phone_number_sha256 = phone;
+
+  let externalId;
+  if (userDataFrom.external_id) externalId = userDataFrom.external_id;
+  else if (userDataFrom.external_id_sha256) externalId = userDataFrom.external_id_sha256;
+  else if (userDataFrom.user_id) externalId = userDataFrom.user_id;
+  else if (userDataFrom.userId) externalId = userDataFrom.userId;
+  else if (useDL && copyFromDataLayerWithVersion('external_id'))
+    externalId = copyFromDataLayerWithVersion('external_id');
+  else if (useDL && copyFromDataLayerWithVersion('user_id'))
+    externalId = copyFromDataLayerWithVersion('user_id');
+  else if (useDL && copyFromDataLayerWithVersion('userId'))
+    externalId = copyFromDataLayerWithVersion('userId');
+  if (externalId) {
+    const isExternalIdHashed = isHashed(externalId);
+    userData[isExternalIdHashed ? 'external_id_sha256' : 'external_id'] = externalId;
+  }
+
+  if (userDataFrom.city) userData.city_sha256 = userDataFrom.city;
+  else if (userDataFrom.ct) userData.city_sha256 = userDataFrom.ct;
+  else if (userDataFrom.city_sha256) userData.city_sha256 = userDataFrom.city_sha256;
+  else if (userDataFrom.address && userDataFrom.address.city)
+    userData.city_sha256 = userDataFrom.address.city;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].city)
+    userData.city_sha256 = userDataFrom.address[0].city;
+
+  if (userDataFrom.zip) userData.zip_code_sha256 = userDataFrom.zip;
+  else if (userDataFrom.postal_code) userData.zip_code_sha256 = userDataFrom.postal_code;
+  else if (userDataFrom.zp) userData.zip_code_sha256 = userDataFrom.zp;
+  else if (userDataFrom.zip_code_sha256) userData.zip_code_sha256 = userDataFrom.zip_code_sha256;
+  else if (userDataFrom.address && userDataFrom.address.postal_code)
+    userData.zip_code_sha256 = userDataFrom.address.postal_code;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].postal_code)
+    userData.zip_code_sha256 = userDataFrom.address[0].postal_code;
+  else if (userDataFrom.address && userDataFrom.address.zip)
+    userData.zip_code_sha256 = userDataFrom.address.zip;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].zip)
+    userData.zip_code_sha256 = userDataFrom.address[0].zip;
+
+  if (userDataFrom.country) userData.country_sha256 = userDataFrom.country;
+  else if (userDataFrom.country_sha256) userData.country_sha256 = userDataFrom.country_sha256;
+  else if (userDataFrom.address && userDataFrom.address.country)
+    userData.country_sha256 = userDataFrom.address.country;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].country)
+    userData.country_sha256 = userDataFrom.address[0].country;
+
+  return userData;
 }
 
 function addUAEventParameters(eventName, eventParameters, ecommerce) {
@@ -725,6 +1066,58 @@ function assign(target, source) {
     target[key] = source[key];
   });
   return target;
+}
+
+function objHasProps(obj) {
+  return getType(obj) === 'object' && Object.keys(obj).length > 0;
+}
+
+function objIsEmptyOrContainsOnlyFalsyValues(obj) {
+  if (getType(obj) !== 'object') return;
+  const objValues = Object.values(obj);
+  if (objValues.length === 0 || objValues.every((v) => !v)) return true;
+}
+
+function isHashed(value) {
+  if (!value) return false;
+  return makeString(value).match('^[A-Fa-f0-9]{64}$') !== null;
+}
+
+function normalizePhoneNumber(phoneNumber) {
+  if (!phoneNumber) return;
+  phoneNumber = makeString(phoneNumber)
+    .split('+')
+    .join('')
+    .split(' ')
+    .join('')
+    .split('-')
+    .join('')
+    .split('(')
+    .join('')
+    .split(')')
+    .join('');
+  phoneNumber = '+' + phoneNumber;
+  return phoneNumber;
+}
+
+function normalizeEmail(email) {
+  if (!email) return;
+  return removeWhiteSpace(makeString(email)).toLowerCase();
+}
+
+function removeWhiteSpace(input) {
+  if (!input) return;
+  return makeString(input).split(' ').join('');
+}
+
+function trim(input) {
+  if (!input) return;
+  return makeString(input).trim();
+}
+
+function lowerCase(input) {
+  if (!input) return;
+  return makeString(input).toLowerCase();
 }
 
 function copyFromDataLayerWithVersion(key) {
@@ -1337,6 +1730,180 @@ scenarios:
       assertApi('gtmOnSuccess').wasCalled();
       assertApi('gtmOnFailure').wasNotCalled();
     });
+- name: '[User Data] Parses all fields from DataLayer user_data object'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableDataLayerMapping: true
+    });
+
+    mock('copyFromDataLayer', (key) => {
+      if (key === 'user_data') return {
+        email: 'dl@example.com',
+        phone: '+1555000000',
+        external_id: 'ext123',
+        city: 'New York',
+        zip: '10001',
+        country: 'US'
+      };
+      return undefined;
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const userData = initCalls[0][1].user;
+    assertThat(userData.email_sha256).isEqualTo('dl@example.com');
+    assertThat(userData.phone_number_sha256).isEqualTo('+1555000000');
+    assertThat(userData.external_id).isEqualTo('ext123');
+    assertThat(userData.city_sha256).isEqualTo('New York');
+    assertThat(userData.zip_code_sha256).isEqualTo('10001');
+    assertThat(userData.country_sha256).isEqualTo('US');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data] Array email and phone values take the first element'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataFromVariable: {
+        email: ['first@example.com', 'second@example.com'],
+        phone: ['+111', '+222']
+      }
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    const userData = initCalls[0][1].user;
+    assertThat(userData.email_sha256).isEqualTo('first@example.com');
+    assertThat(userData.phone_number_sha256).isEqualTo('+111');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data] Address nested fields are parsed correctly'
+  code: |-
+    [
+      {
+        desc: 'object address',
+        ud: { address: { city: 'Boston', postal_code: '02101', country: 'US' } },
+        expectCity: 'Boston', expectZip: '02101', expectCountry: 'US'
+      },
+      {
+        desc: 'array address',
+        ud: { address: [{ city: 'Chicago', zip: '60601', country: 'CA' }] },
+        expectCity: 'Chicago', expectZip: '60601', expectCountry: 'CA'
+      }
+    ].forEach((scenario) => {
+      queueCalls = [];
+
+      const testData = assign(assign({}, mockData), {
+        enableAdvancedMatching: true,
+        userDataFromVariable: scenario.ud
+      });
+
+      runCode(testData);
+
+      const initCalls = queueCalls.filter((c) => c[0] === 'init');
+      const userData = initCalls[0][1].user;
+      assertThat(userData.city_sha256).isEqualTo(scenario.expectCity);
+      assertThat(userData.zip_code_sha256).isEqualTo(scenario.expectZip);
+      assertThat(userData.country_sha256).isEqualTo(scenario.expectCountry);
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[User Data] Hashed external_id is stored as external_id_sha256'
+  code: |-
+    const hashedId = 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3';
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataFromVariable: { external_id: hashedId }
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    const userData = initCalls[0][1].user;
+    assertThat(userData.external_id_sha256).isEqualTo(hashedId);
+    assertThat(userData.external_id).isUndefined();
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data] External ID falls back to DataLayer when useDL is true'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableDataLayerMapping: true
+    });
+
+    mock('copyFromDataLayer', (key) => {
+      if (key === 'user_data') return { email: 'test@example.com' };
+      if (key === 'external_id') return 'dl-ext-id';
+      return undefined;
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    const userData = initCalls[0][1].user;
+    assertThat(userData.external_id).isEqualTo('dl-ext-id');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data] Empty or all-falsy user data returns no user in initData'
+  code: |-
+    [
+      { description: 'empty object', userData: {} },
+      { description: 'all-falsy values', userData: { email_sha256: '', phone_number_sha256: null } }
+    ].forEach((scenario) => {
+      queueCalls = [];
+
+      const testData = assign(assign({}, mockData), {
+        enableAdvancedMatching: true,
+        userDataFromVariable: scenario.userData
+      });
+
+      runCode(testData);
+
+      const initCalls = queueCalls.filter((c) => c[0] === 'init');
+      assertThat(initCalls.length).isEqualTo(1);
+      assertThat(initCalls[0][1].user).isUndefined();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[User Data] Table list and variable are merged into initData user'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataFromVariable: { email_sha256: 'test@example.com' },
+      userDataList: [{ name: 'phone_number_sha256', value: '+1234567890' }]
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    const userData = initCalls[0][1].user;
+    assertThat(userData.email_sha256).isEqualTo('test@example.com');
+    assertThat(userData.phone_number_sha256).isEqualTo('+1234567890');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data] Disabled advanced matching sends no user in initData'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: false,
+      userDataFromVariable: { email: 'test@example.com' }
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    assertThat(initCalls[0][1].user).isUndefined();
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
 - name: '[Event Data] GA4 order_created with multiple items builds correct properties'
   code: |-
     const testData = assign(assign({}, mockData), {
@@ -1538,6 +2105,129 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Enhancement] Reads stored data from localStorage and writes back'
+  code: |-
+    localStorageData['gtmeec-oa'] = '{"email_sha256":"stored@example.com"}';
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      userDataFromVariable: { phone_number_sha256: '+1999999999' }
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    const userData = initCalls[0][1].user;
+    assertThat(userData.email_sha256).isEqualTo('stored@example.com');
+    assertThat(userData.phone_number_sha256).isEqualTo('+1999999999');
+
+    assertThat(localStorageData['gtmeec-oa']).isDefined();
+    const stored = JSON.parse(localStorageData['gtmeec-oa']);
+    assertThat(stored.email_sha256).isEqualTo('stored@example.com');
+    assertThat(stored.phone_number_sha256).isEqualTo('+1999999999');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Enhancement] Skips localStorage when consent is denied'
+  code: |-
+    let getItemCalled = false;
+    let setItemCalled = false;
+    mockObject('localStorage', {
+      getItem: (key) => { getItemCalled = true; return localStorageData[key]; },
+      setItem: (key, value) => { setItemCalled = true; localStorageData[key] = value; }
+    });
+
+    localStorageData['gtmeec-oa'] = '{"email_sha256":"stored@example.com"}';
+
+    const testData = assign(assign({}, mockData), {
+      enableGoogleConsentMode: true,
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      userDataFromVariable: { phone_number_sha256: '+1999999999' }
+    });
+
+    mock('isConsentGranted', () => false);
+
+    runCode(testData);
+
+    assertThat(getItemCalled).isFalse();
+    assertThat(setItemCalled).isFalse();
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Enhancement] Hashed storage uses sync hash when dataTag256 is available'
+  code: |-
+    mock('copyFromWindow', (key) => {
+      if (key === 'oaiq') return mockQueue;
+      if (key === 'dataTag256') return function() { return 'abc123hash'; };
+      return undefined;
+    });
+
+    mock('callInWindow', (key) => {
+      if (key === 'dataTag256') return 'abc123hash';
+      return undefined;
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      storeUserDataHashed: true,
+      userDataFromVariable: { email_sha256: 'test@example.com' }
+    });
+
+    runCode(testData);
+
+    assertThat(localStorageData['gtmeec-oa']).isDefined();
+    const stored = JSON.parse(localStorageData['gtmeec-oa']);
+    assertThat(stored.email_sha256).isEqualTo('abc123hash');
+    assertApi('callInWindow').wasCalledWith('dataTag256', 'test@example.com', 'HEX');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Enhancement] Hashed storage with async sha256 stores hashed data'
+  code: |-
+    mock('sha256', (input, successCb, errorCb, options) => {
+      successCb('async_hashed_' + input);
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      storeUserDataHashed: true,
+      userDataFromVariable: { email_sha256: 'test@example.com' }
+    });
+
+    runCode(testData);
+
+    assertThat(localStorageData['gtmeec-oa']).isDefined();
+    const stored = JSON.parse(localStorageData['gtmeec-oa']);
+    assertThat(stored.email_sha256).isEqualTo('async_hashed_test@example.com');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Enhancement] Async sha256 error callback sets the field to undefined
+    in storage'
+  code: |-
+    mock('sha256', (input, successCb, errorCb, options) => {
+      errorCb();
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      storeUserDataHashed: true,
+      userDataFromVariable: { email_sha256: 'test@example.com' }
+    });
+
+    runCode(testData);
+
+    assertThat(localStorageData['gtmeec-oa']).isDefined();
+    const stored = JSON.parse(localStorageData['gtmeec-oa']);
+    assertThat(stored.email_sha256).isUndefined();
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
 - name: '[DL Version] enableMostRecentDataLayerEventOnly uses DL version 1'
   code: |-
     let capturedVersion;
@@ -1649,5 +2339,10 @@ setup: |-
 
 ___NOTES___
 
-Created on 11/25/2025, 10:44:33 AM
+2026-05-06 - Change Notes:
+  - Added User Data support.
 
+2026-04-23 - Change Notes:
+  - Initial release.
+
+Created on 11/25/2025, 10:44:33 AM

@@ -70,7 +70,9 @@ function getOrCreateQueue() {
 }
 
 function sendEvent(data, isManualOrGCMConsentGranted) {
+  const userData = getUserData(data, isManualOrGCMConsentGranted);
   const initData = { pixelId: data.pixelId, debug: data.debugEnabled };
+  if (objHasProps(userData)) initData.user = userData;
   runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
     const queue = getOrCreateQueue();
     queue('init', initData);
@@ -125,6 +127,39 @@ function getEventNameInfo(data) {
     : { eventName: 'custom', customEventName: data.eventNameCustom };
 }
 
+function getUserData(data, isManualOrGCMConsentGranted) {
+  if (!data.enableAdvancedMatching) return;
+
+  let userData = {};
+
+  if (data.enableEventUserDataEnhancement) {
+    userData = getEventUserDataEnhancement(isManualOrGCMConsentGranted);
+  }
+
+  if (data.enableDataLayerMapping) {
+    const userDataFromDataLayer = copyFromDataLayerWithVersion('user_data');
+    if (getType(userDataFromDataLayer) === 'object') {
+      addUserData(userData, userDataFromDataLayer, true);
+    }
+  }
+
+  if (getType(data.userDataFromVariable) === 'object') {
+    addUserData(userData, data.userDataFromVariable, false);
+  }
+
+  if (data.userDataList && data.userDataList.length) {
+    assign(userData, makeTableMap(data.userDataList, 'name', 'value'));
+  }
+
+  if (objIsEmptyOrContainsOnlyFalsyValues(userData)) return;
+
+  if (data.enableEventUserDataEnhancement) {
+    storeEventUserDataEnhancement(data, isManualOrGCMConsentGranted, userData);
+  }
+
+  return userData;
+}
+
 function getEventParametersType(eventName) {
   const eventParametersTypeMap = {
     custom: 'custom',
@@ -172,6 +207,105 @@ function getEventParameters(data, eventName) {
   return eventParameters;
 }
 
+function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
+  if (!isManualOrGCMConsentGranted || !localStorage) return {};
+
+  const gtmeec = localStorage.getItem('gtmeec-oa');
+  if (gtmeec) {
+    const gtmeecParsed = JSON.parse(gtmeec);
+    if (getType(gtmeecParsed) === 'object') return gtmeecParsed;
+  }
+
+  return {};
+}
+
+function normalizeBasedOnSchemaKey(schemaKey, identifier) {
+  if (schemaKey === 'phone_number_sha256') return normalizePhoneNumber(identifier);
+  else if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
+  else if (
+    schemaKey === 'country_sha256' ||
+    schemaKey === 'city_sha256' ||
+    schemaKey === 'zip_code_sha256'
+  ) {
+    return removeWhiteSpace(lowerCase(identifier));
+  } else if (
+    schemaKey === 'external_id_sha256' ||
+    schemaKey === 'external_id' ||
+    schemaKey === 'ip_address' ||
+    schemaKey === 'user_agent'
+  ) {
+    return trim(identifier);
+  } else return identifier;
+}
+
+function hashUserDataFields(userData, storeUserDataInLocalStorage) {
+  const canUseHashSync = getType(copyFromWindow('dataTag256')) === 'function';
+  const hashAsyncHelpers = {
+    pendingHashes: 0,
+    maybeFinish: (userDataHashed) => {
+      if (hashAsyncHelpers.pendingHashes === 0) storeUserDataInLocalStorage(userDataHashed);
+    }
+  };
+
+  const userDataHashed = {};
+
+  const fieldNames = Object.keys(userData);
+  fieldNames.forEach((fieldName) => {
+    const value = userData[fieldName];
+
+    if (value === undefined || value === null || value === '') return;
+    if (isHashed(value)) {
+      userDataHashed[fieldName] = value;
+      return;
+    }
+
+    const normalizedValue = makeString(normalizeBasedOnSchemaKey(fieldName, value))
+      .toLowerCase()
+      .trim();
+    if (canUseHashSync)
+      userDataHashed[fieldName] = callInWindow('dataTag256', normalizedValue, 'HEX');
+    else {
+      hashAsyncHelpers.pendingHashes++;
+      sha256(
+        normalizedValue,
+        (digest) => {
+          userDataHashed[fieldName] = digest;
+          hashAsyncHelpers.pendingHashes--;
+          hashAsyncHelpers.maybeFinish(userDataHashed);
+        },
+        () => {
+          userDataHashed[fieldName] = undefined;
+          hashAsyncHelpers.pendingHashes--;
+          hashAsyncHelpers.maybeFinish(userDataHashed);
+        },
+        { outputEncoding: 'hex' }
+      );
+    }
+  });
+
+  if (canUseHashSync) {
+    storeUserDataInLocalStorage(userDataHashed);
+    return userDataHashed;
+  } else {
+    hashAsyncHelpers.maybeFinish(userDataHashed);
+    return;
+  }
+}
+
+function storeUserDataInLocalStorage(userData) {
+  if (!localStorage || !objHasProps(userData)) return;
+
+  const gtmeec = JSON.stringify(userData);
+  localStorage.setItem('gtmeec-oa', gtmeec);
+}
+
+function storeEventUserDataEnhancement(data, isManualOrGCMConsentGranted, userData) {
+  if (!isManualOrGCMConsentGranted || !localStorage || !objHasProps(userData)) return;
+
+  if (!data.storeUserDataHashed) storeUserDataInLocalStorage(userData);
+  else hashUserDataFields(userData, storeUserDataInLocalStorage);
+}
+
 function pushEventIdToDataLayer(data) {
   if (!data.pushEventIdToDataLayer) return;
 
@@ -181,6 +315,74 @@ function pushEventIdToDataLayer(data) {
     eventId: data.eventId,
     event: data.eventIdDataLayerEventName || 'openAIPixelDataLayerPush'
   });
+}
+
+function addUserData(userData, userDataFrom, useDL) {
+  let email =
+    userDataFrom.email ||
+    userDataFrom.email_address ||
+    userDataFrom.em ||
+    userDataFrom.sha256_email_address ||
+    userDataFrom.email_sha256;
+  const emailType = getType(email);
+  if (emailType === 'array' || emailType === 'object') email = email[0];
+  if (email) userData.email_sha256 = email;
+
+  let phone =
+    userDataFrom.phone ||
+    userDataFrom.phone_number ||
+    userDataFrom.ph ||
+    userDataFrom.sha256_phone_number ||
+    userDataFrom.phone_number_sha256;
+  const phoneType = getType(phone);
+  if (phoneType === 'array' || phoneType === 'object') phone = phone[0];
+  if (phone) userData.phone_number_sha256 = phone;
+
+  let externalId;
+  if (userDataFrom.external_id) externalId = userDataFrom.external_id;
+  else if (userDataFrom.external_id_sha256) externalId = userDataFrom.external_id_sha256;
+  else if (userDataFrom.user_id) externalId = userDataFrom.user_id;
+  else if (userDataFrom.userId) externalId = userDataFrom.userId;
+  else if (useDL && copyFromDataLayerWithVersion('external_id'))
+    externalId = copyFromDataLayerWithVersion('external_id');
+  else if (useDL && copyFromDataLayerWithVersion('user_id'))
+    externalId = copyFromDataLayerWithVersion('user_id');
+  else if (useDL && copyFromDataLayerWithVersion('userId'))
+    externalId = copyFromDataLayerWithVersion('userId');
+  if (externalId) {
+    const isExternalIdHashed = isHashed(externalId);
+    userData[isExternalIdHashed ? 'external_id_sha256' : 'external_id'] = externalId;
+  }
+
+  if (userDataFrom.city) userData.city_sha256 = userDataFrom.city;
+  else if (userDataFrom.ct) userData.city_sha256 = userDataFrom.ct;
+  else if (userDataFrom.city_sha256) userData.city_sha256 = userDataFrom.city_sha256;
+  else if (userDataFrom.address && userDataFrom.address.city)
+    userData.city_sha256 = userDataFrom.address.city;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].city)
+    userData.city_sha256 = userDataFrom.address[0].city;
+
+  if (userDataFrom.zip) userData.zip_code_sha256 = userDataFrom.zip;
+  else if (userDataFrom.postal_code) userData.zip_code_sha256 = userDataFrom.postal_code;
+  else if (userDataFrom.zp) userData.zip_code_sha256 = userDataFrom.zp;
+  else if (userDataFrom.zip_code_sha256) userData.zip_code_sha256 = userDataFrom.zip_code_sha256;
+  else if (userDataFrom.address && userDataFrom.address.postal_code)
+    userData.zip_code_sha256 = userDataFrom.address.postal_code;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].postal_code)
+    userData.zip_code_sha256 = userDataFrom.address[0].postal_code;
+  else if (userDataFrom.address && userDataFrom.address.zip)
+    userData.zip_code_sha256 = userDataFrom.address.zip;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].zip)
+    userData.zip_code_sha256 = userDataFrom.address[0].zip;
+
+  if (userDataFrom.country) userData.country_sha256 = userDataFrom.country;
+  else if (userDataFrom.country_sha256) userData.country_sha256 = userDataFrom.country_sha256;
+  else if (userDataFrom.address && userDataFrom.address.country)
+    userData.country_sha256 = userDataFrom.address.country;
+  else if (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].country)
+    userData.country_sha256 = userDataFrom.address[0].country;
+
+  return userData;
 }
 
 function addUAEventParameters(eventName, eventParameters, ecommerce) {
@@ -319,6 +521,58 @@ function assign(target, source) {
     target[key] = source[key];
   });
   return target;
+}
+
+function objHasProps(obj) {
+  return getType(obj) === 'object' && Object.keys(obj).length > 0;
+}
+
+function objIsEmptyOrContainsOnlyFalsyValues(obj) {
+  if (getType(obj) !== 'object') return;
+  const objValues = Object.values(obj);
+  if (objValues.length === 0 || objValues.every((v) => !v)) return true;
+}
+
+function isHashed(value) {
+  if (!value) return false;
+  return makeString(value).match('^[A-Fa-f0-9]{64}$') !== null;
+}
+
+function normalizePhoneNumber(phoneNumber) {
+  if (!phoneNumber) return;
+  phoneNumber = makeString(phoneNumber)
+    .split('+')
+    .join('')
+    .split(' ')
+    .join('')
+    .split('-')
+    .join('')
+    .split('(')
+    .join('')
+    .split(')')
+    .join('');
+  phoneNumber = '+' + phoneNumber;
+  return phoneNumber;
+}
+
+function normalizeEmail(email) {
+  if (!email) return;
+  return removeWhiteSpace(makeString(email)).toLowerCase();
+}
+
+function removeWhiteSpace(input) {
+  if (!input) return;
+  return makeString(input).split(' ').join('');
+}
+
+function trim(input) {
+  if (!input) return;
+  return makeString(input).trim();
+}
+
+function lowerCase(input) {
+  if (!input) return;
+  return makeString(input).toLowerCase();
 }
 
 function copyFromDataLayerWithVersion(key) {
