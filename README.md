@@ -1,6 +1,6 @@
 # OpenAI Ads Pixel for Google Tag Manager Web
 
-The **OpenAI Ads Pixel by Stape** tag integrates the OpenAI (ChatGPT) Ads Pixel into your website via a Google Tag Manager Web container. It allows you to send standard or custom events to OpenAI, including user data for Advanced Matching, to improve ad performance and attribution.
+The **OpenAI Ads Pixel by Stape** tag integrates the [OpenAI (ChatGPT) Ads Pixel](https://developers.openai.com/ads/measurement-pixel) into your website via a Google Tag Manager Web container. It allows you to send standard or custom events to OpenAI to improve ad performance and attribution.
 
 ## How to Use
 
@@ -9,13 +9,11 @@ The **OpenAI Ads Pixel by Stape** tag integrates the OpenAI (ChatGPT) Ads Pixel 
 3. Choose how the **Event Name** is defined:
    - **Inherit from DataLayer** — maps GTM/GA4 event names to OpenAI Pixel equivalents.
    - **Override** — choose from a list of standard events or provide a custom event name.
-4. Enable **Automatic Data Layer Mapping** (recommended) to automatically parse GA4 and UA e-commerce formats for event parameters and user data.
-5. (Optional) Enable **Advanced Matching** to securely pass user data (e.g., email, phone) to OpenAI for better match rates.
-6. (Optional) Enable **Event User Data Enhancement** to store and reuse user data via `localStorage` across sessions.
-7. (Optional) Configure **Consent Settings** using Google Consent Mode or manual consent control.
-8. (Optional) Configure **Server-Side Tracking Settings** with an Event ID for deduplication with the OpenAI Conversions API.
-9. (Optional) Add extra metadata to your events using the **Event Parameters** section.
-10. (Optional) Enable **JS SDK Debugging Logs** in the browser Console for troubleshooting.
+4. Enable **Automatic Data Layer Mapping** (recommended) to automatically parse GA4 and UA e-commerce formats for event parameters.
+5. (Optional) Configure **Consent Settings** using Google Consent Mode or manual consent control.
+6. (Optional) Configure **Server-Side Tracking Settings** with an Event ID for deduplication with the OpenAI Conversions API.
+7. (Optional) Add extra metadata to your events using the **Event Parameters** section.
+8. (Optional) Enable **JS SDK Debugging Logs** in the browser Console for troubleshooting.
 
 ## Event Name Setup Options
 
@@ -43,31 +41,6 @@ Any unmapped event name is forwarded as a `custom` event with the original name 
 - **Event Name** — must be resolved either from the Data Layer or the override settings.
 
 ## Features
-
-### Advanced Matching
-
-Securely enrich events with user identifiers to improve ad attribution. The tag automatically hashes PII using SHA256 if the value is not already hashed. Supported fields include:
-
-- **Email** (`email_sha256`)
-- **Phone Number** (`phone_number_sha256`)
-- **External ID** (`external_id` / `external_id_sha256`)
-- **City** (`city_sha256`)
-- **ZIP Code** (`zip_code_sha256`)
-- **Country** (`country_sha256`)
-- **IP Address** (`ip_address`)
-- **User Agent** (`user_agent`)
-
-User data can be sourced from:
-
-- A manually entered table.
-- The Data Layer (`user_data` object).
-- A custom variable (e.g., a User-Provided Data Variable).
-
-### Event User Data Enhancement
-
-When enabled, user data is stored in `localStorage` (under the key `gtmeec-oa`) to persist across events and sessions. This improves match quality for repeat visitors or multi-page actions. Data can be stored in plain text or hashed (SHA256).
-
-`localStorage` reads and writes are gated on consent — when consent has not been granted, the tag skips all `localStorage` interactions to ensure no user data is persisted without permission.
 
 ### Consent Settings
 
@@ -108,6 +81,11 @@ Enable **JS SDK Debugging Logs** to have the OpenAI SDK print debug messages to 
 [oaiq] queue flushed ...
 [oaiq] captured click id from query param ...
 ```
+
+## Useful Resources
+
+- [OpenAI Docs: OpenAI Ads Measurement Pixel](https://developers.openai.com/ads/measurement-pixel)
+- [OpenAI Docs: Supported Events](https://developers.openai.com/ads/supported-events)
 
 ## Open Source
 
