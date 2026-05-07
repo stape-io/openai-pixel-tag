@@ -13,6 +13,7 @@ const makeInteger = require('makeInteger');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
+const Math = require('Math');
 const Object = require('Object');
 const sha256 = require('sha256');
 const templateStorage = require('templateStorage');
@@ -166,7 +167,18 @@ function getEventParameters(data, eventName) {
   }
 
   if (data.eventParametersList && data.eventParametersList.length) {
-    assign(eventParameters, makeTableMap(data.eventParametersList, 'name', 'value'));
+    const eventParametersFromList = makeTableMap(data.eventParametersList, 'name', 'value');
+    if (eventParametersFromList.hasOwnProperty('amount_regular_unit')) {
+      if (!eventParametersFromList.hasOwnProperty('amount')) {
+        eventParametersFromList.amount = convertCurrencyValueToMinorUnit(
+          eventParametersFromList.amount_regular_unit,
+          eventParametersFromList.currency || eventParameters.currency
+        );
+      }
+
+      Object.delete(eventParametersFromList, 'amount_regular_unit');
+    }
+    assign(eventParameters, eventParametersFromList);
   }
 
   return eventParameters;
@@ -198,6 +210,9 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
       hasActionObject && getType(ecommerce[action].actionField) === 'object';
     let valueFromItems = 0;
 
+    const currency = eventParameters.currency || ecommerce.currencyCode;
+    if (currency) eventParameters.currency = currency;
+
     if (
       hasActionObject &&
       getType(ecommerce[action].products) === 'array' &&
@@ -212,7 +227,8 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
         if (d.id) content.id = makeString(d.id);
         content.quantity = makeInteger(d.quantity) || 1;
         if (d.price) {
-          const price = makeNumber(d.price);
+          // It considers the value from data layer is in regular unit.
+          const price = convertCurrencyValueToMinorUnit(d.price, eventParameters.currency);
           valueFromItems += content.quantity ? content.quantity * price : price;
           content.amount = price;
         }
@@ -222,14 +238,20 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
       });
     }
 
-    const amount =
-      (hasActionFieldObject && ecommerce[action].actionField.revenue
+    const amountFromDataLayer =
+      hasActionFieldObject && ecommerce[action].actionField.revenue
         ? ecommerce[action].actionField.revenue
-        : undefined) || valueFromItems;
-    if (amount) eventParameters.amount = makeNumber(amount);
-
-    const currency = ecommerce.currencyCode;
-    if (currency) eventParameters.currency = ecommerce.currencyCode;
+        : undefined;
+    // It considers the value from data layer is in regular unit.
+    if (amountFromDataLayer) {
+      eventParameters.amount = convertCurrencyValueToMinorUnit(
+        amountFromDataLayer,
+        eventParameters.currency
+      );
+    } else if (valueFromItems) {
+      // Already converted to minor unit.
+      eventParameters.amount = valueFromItems;
+    }
   }
 
   return eventParameters;
@@ -237,12 +259,13 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
 
 function addGA4EventParameters(eventParameters, ecommerce) {
   const items = copyFromDataLayerWithVersion('items') || ecommerce.items;
-  let currencyFromItems = '';
   let valueFromItems = 0;
+  let currency =
+    eventParameters.currency || ecommerce.currency || copyFromDataLayerWithVersion('currency');
 
   if (getType(items) === 'array' && items.length) {
     eventParameters.contents = [];
-    currencyFromItems = items[0].currency;
+    if (!currency && items[0].currency) currency = items[0].currency;
 
     items.forEach((d) => {
       const content = {
@@ -251,7 +274,8 @@ function addGA4EventParameters(eventParameters, ecommerce) {
       if (d.item_id) content.id = makeString(d.item_id);
       content.quantity = makeInteger(d.quantity) || 1;
       if (d.price) {
-        const price = makeNumber(d.price);
+        // It considers the value from data layer is in regular unit.
+        const price = convertCurrencyValueToMinorUnit(d.price, currency);
         valueFromItems += content.quantity ? content.quantity * price : price;
         content.amount = price;
       }
@@ -261,12 +285,19 @@ function addGA4EventParameters(eventParameters, ecommerce) {
     });
   }
 
-  const amount = ecommerce.value || valueFromItems || copyFromDataLayerWithVersion('value');
-  if (amount) eventParameters.amount = makeNumber(amount);
-
-  const currency =
-    ecommerce.currency || currencyFromItems || copyFromDataLayerWithVersion('currency');
   if (currency) eventParameters.currency = currency;
+
+  const amountFromDataLayer = ecommerce.value || copyFromDataLayerWithVersion('value');
+  // It considers the value from data layer is in regular unit.
+  if (amountFromDataLayer) {
+    eventParameters.amount = convertCurrencyValueToMinorUnit(
+      amountFromDataLayer,
+      eventParameters.currency
+    );
+  } else if (valueFromItems) {
+    // Already converted to minor unit.
+    eventParameters.amount = valueFromItems;
+  }
 
   return eventParameters;
 }
@@ -324,4 +355,28 @@ function assign(target, source) {
 function copyFromDataLayerWithVersion(key) {
   const dataLayerVersion = data.enableMostRecentDataLayerEventOnly ? 1 : 2;
   return copyFromDataLayer(key, dataLayerVersion);
+}
+
+function roundValue(value) {
+  if (!value) return value;
+  return Math.round(makeNumber(value) * 100) / 100;
+}
+
+function convertCurrencyValueToMinorUnit(value, currency) {
+  if (!value) return value;
+
+  // prettier-ignore
+  const zeroDecimalCurrencies = [
+    'BIF', 'CLP', 'DJF', 'GNF', 'IDR', 'ISK',
+    'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF',
+    'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
+  ];
+  const threeDecimalCurrencies = ['BHD', 'IQD', 'JOD', 'KWD', 'LYD', 'OMR', 'TND'];
+  const upperCurrency = currency ? makeString(currency).toUpperCase() : '';
+
+  let multiplier = 100; // default: 2 decimal places (BRL, USD, EUR, GBP, etc.)
+  if (zeroDecimalCurrencies.indexOf(upperCurrency) !== -1) multiplier = 1;
+  else if (threeDecimalCurrencies.indexOf(upperCurrency) !== -1) multiplier = 1000;
+
+  return makeInteger(roundValue(value * multiplier));
 }
