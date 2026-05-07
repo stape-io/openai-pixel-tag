@@ -1,6 +1,6 @@
 # OpenAI Ads Pixel for Google Tag Manager Web
 
-The **OpenAI Ads Pixel by Stape** tag integrates the [OpenAI (ChatGPT) Ads Pixel](https://developers.openai.com/ads/measurement-pixel) into your website via a Google Tag Manager Web container. It allows you to send standard or custom events to OpenAI to improve ad performance and attribution.
+The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pixel](https://developers.openai.com/ads/measurement-pixel)** into your website via a Google Tag Manager Web container. It allows you to send standard or custom events to OpenAI to improve ad performance and attribution.
 
 ## How to Use
 
