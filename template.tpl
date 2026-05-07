@@ -173,7 +173,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "enableDataLayerMapping",
         "checkboxText": "Enable automatic Event Parameters mapping from the Data Layer",
         "simpleValueType": true,
-        "help": "If enabled, the tag will map standard Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e: GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n or  UA \u003ci\u003eecommerce[action].products[].id\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
+        "help": "If enabled, the tag will map standard Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e (the tag always considers the auto-mapped value to be in the currency regular unit and it converts to the lowest unit according to the currency): GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n or  UA \u003ci\u003eecommerce[action].products[].id\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
         "defaultValue": true,
         "subParams": [
           {
@@ -243,6 +243,11 @@ ___TEMPLATE_PARAMETERS___
     "type": "GROUP",
     "subParams": [
       {
+        "type": "LABEL",
+        "name": "eventParametersLabel",
+        "displayName": "Check these help pages \u003ca href\u003d\"https://developers.openai.com/ads/measurement-pixel\"\u003e[1]\u003c/a\u003e and \u003ca href\u003d\"https://developers.openai.com/ads/supported-events\"\u003e[2]\u003c/a\u003e for a description of each \u003ci\u003eEvent Parameters\u003c/i\u003e and their expected type and value.\u003cbr/\u003e\u003cbr/\u003e"
+      },
+      {
         "type": "SELECT",
         "name": "eventParametersFromVariable",
         "displayName": "Load Parameters From Variable",
@@ -273,7 +278,11 @@ ___TEMPLATE_PARAMETERS___
             "selectItems": [
               {
                 "value": "amount",
-                "displayValue": "Amount"
+                "displayValue": "Amount (in the currency\u0027s lowest unit)"
+              },
+              {
+                "value": "amount_regular_unit",
+                "displayValue": "Amount (in the currency\u0027s regular unit)"
               },
               {
                 "value": "currency",
@@ -419,6 +428,7 @@ const makeInteger = require('makeInteger');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
+const Math = require('Math');
 const Object = require('Object');
 const sha256 = require('sha256');
 const templateStorage = require('templateStorage');
@@ -572,7 +582,18 @@ function getEventParameters(data, eventName) {
   }
 
   if (data.eventParametersList && data.eventParametersList.length) {
-    assign(eventParameters, makeTableMap(data.eventParametersList, 'name', 'value'));
+    const eventParametersFromList = makeTableMap(data.eventParametersList, 'name', 'value');
+    if (eventParametersFromList.hasOwnProperty('amount_regular_unit')) {
+      if (!eventParametersFromList.hasOwnProperty('amount')) {
+        eventParametersFromList.amount = convertCurrencyValueToMinorUnit(
+          eventParametersFromList.amount_regular_unit,
+          eventParametersFromList.currency || eventParameters.currency
+        );
+      }
+
+      Object.delete(eventParametersFromList, 'amount_regular_unit');
+    }
+    assign(eventParameters, eventParametersFromList);
   }
 
   return eventParameters;
@@ -604,6 +625,9 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
       hasActionObject && getType(ecommerce[action].actionField) === 'object';
     let valueFromItems = 0;
 
+    const currency = eventParameters.currency || ecommerce.currencyCode;
+    if (currency) eventParameters.currency = currency;
+
     if (
       hasActionObject &&
       getType(ecommerce[action].products) === 'array' &&
@@ -618,7 +642,8 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
         if (d.id) content.id = makeString(d.id);
         content.quantity = makeInteger(d.quantity) || 1;
         if (d.price) {
-          const price = makeNumber(d.price);
+          // It considers the value from data layer is in regular unit.
+          const price = convertCurrencyValueToMinorUnit(d.price, eventParameters.currency);
           valueFromItems += content.quantity ? content.quantity * price : price;
           content.amount = price;
         }
@@ -628,14 +653,20 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
       });
     }
 
-    const amount =
-      (hasActionFieldObject && ecommerce[action].actionField.revenue
+    const amountFromDataLayer =
+      hasActionFieldObject && ecommerce[action].actionField.revenue
         ? ecommerce[action].actionField.revenue
-        : undefined) || valueFromItems;
-    if (amount) eventParameters.amount = makeNumber(amount);
-
-    const currency = ecommerce.currencyCode;
-    if (currency) eventParameters.currency = ecommerce.currencyCode;
+        : undefined;
+    // It considers the value from data layer is in regular unit.
+    if (amountFromDataLayer) {
+      eventParameters.amount = convertCurrencyValueToMinorUnit(
+        amountFromDataLayer,
+        eventParameters.currency
+      );
+    } else if (valueFromItems) {
+      // Already converted to minor unit.
+      eventParameters.amount = valueFromItems;
+    }
   }
 
   return eventParameters;
@@ -643,12 +674,13 @@ function addUAEventParameters(eventName, eventParameters, ecommerce) {
 
 function addGA4EventParameters(eventParameters, ecommerce) {
   const items = copyFromDataLayerWithVersion('items') || ecommerce.items;
-  let currencyFromItems = '';
   let valueFromItems = 0;
+  let currency =
+    eventParameters.currency || ecommerce.currency || copyFromDataLayerWithVersion('currency');
 
   if (getType(items) === 'array' && items.length) {
     eventParameters.contents = [];
-    currencyFromItems = items[0].currency;
+    if (!currency && items[0].currency) currency = items[0].currency;
 
     items.forEach((d) => {
       const content = {
@@ -657,7 +689,8 @@ function addGA4EventParameters(eventParameters, ecommerce) {
       if (d.item_id) content.id = makeString(d.item_id);
       content.quantity = makeInteger(d.quantity) || 1;
       if (d.price) {
-        const price = makeNumber(d.price);
+        // It considers the value from data layer is in regular unit.
+        const price = convertCurrencyValueToMinorUnit(d.price, currency);
         valueFromItems += content.quantity ? content.quantity * price : price;
         content.amount = price;
       }
@@ -667,12 +700,19 @@ function addGA4EventParameters(eventParameters, ecommerce) {
     });
   }
 
-  const amount = ecommerce.value || valueFromItems || copyFromDataLayerWithVersion('value');
-  if (amount) eventParameters.amount = makeNumber(amount);
-
-  const currency =
-    ecommerce.currency || currencyFromItems || copyFromDataLayerWithVersion('currency');
   if (currency) eventParameters.currency = currency;
+
+  const amountFromDataLayer = ecommerce.value || copyFromDataLayerWithVersion('value');
+  // It considers the value from data layer is in regular unit.
+  if (amountFromDataLayer) {
+    eventParameters.amount = convertCurrencyValueToMinorUnit(
+      amountFromDataLayer,
+      eventParameters.currency
+    );
+  } else if (valueFromItems) {
+    // Already converted to minor unit.
+    eventParameters.amount = valueFromItems;
+  }
 
   return eventParameters;
 }
@@ -730,6 +770,30 @@ function assign(target, source) {
 function copyFromDataLayerWithVersion(key) {
   const dataLayerVersion = data.enableMostRecentDataLayerEventOnly ? 1 : 2;
   return copyFromDataLayer(key, dataLayerVersion);
+}
+
+function roundValue(value) {
+  if (!value) return value;
+  return Math.round(makeNumber(value) * 100) / 100;
+}
+
+function convertCurrencyValueToMinorUnit(value, currency) {
+  if (!value) return value;
+
+  // prettier-ignore
+  const zeroDecimalCurrencies = [
+    'BIF', 'CLP', 'DJF', 'GNF', 'IDR', 'ISK',
+    'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF',
+    'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'
+  ];
+  const threeDecimalCurrencies = ['BHD', 'IQD', 'JOD', 'KWD', 'LYD', 'OMR', 'TND'];
+  const upperCurrency = currency ? makeString(currency).toUpperCase() : '';
+
+  let multiplier = 100; // default: 2 decimal places (BRL, USD, EUR, GBP, etc.)
+  if (zeroDecimalCurrencies.indexOf(upperCurrency) !== -1) multiplier = 1;
+  else if (threeDecimalCurrencies.indexOf(upperCurrency) !== -1) multiplier = 1000;
+
+  return makeInteger(roundValue(value * multiplier));
 }
 
 
@@ -1365,7 +1429,7 @@ scenarios:
     assertThat(eventParams.contents[0].quantity).isEqualTo(2);
     assertThat(eventParams.contents[1].id).isEqualTo('SKU2');
     assertThat(eventParams.contents[1].quantity).isEqualTo(1);
-    assertThat(eventParams.amount).isEqualTo(45);
+    assertThat(eventParams.amount).isEqualTo(4500);
     assertThat(eventParams.currency).isEqualTo('EUR');
 
     assertApi('gtmOnSuccess').wasCalled();
@@ -1399,7 +1463,7 @@ scenarios:
     assertThat(eventParams.contents.length).isEqualTo(2);
     assertThat(eventParams.contents[0].id).isEqualTo('P1');
     assertThat(eventParams.contents[1].id).isEqualTo('P2');
-    assertThat(eventParams.amount).isEqualTo(55);
+    assertThat(eventParams.amount).isEqualTo(5500);
     assertThat(eventParams.currency).isEqualTo('GBP');
 
     assertApi('gtmOnSuccess').wasCalled();
@@ -1446,6 +1510,37 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Parameters] amount is passed as-is and amount_regular_unit is converted
+    and renamed to amount'
+  code: |-
+    [
+      {
+        params: [{ name: 'amount', value: 1299 }, { name: 'currency', value: 'USD' }],
+        expectedAmount: 1299
+      },
+      {
+        params: [{ name: 'amount_regular_unit', value: 12.99 }, { name: 'currency', value: 'USD' }],
+        expectedAmount: 1299
+      }
+    ].forEach((scenario) => {
+      queueCalls = [];
+
+      const testData = assign(assign({}, mockData), {
+        enableDataLayerMapping: false,
+        eventParametersList: scenario.params
+      });
+
+      runCode(testData);
+
+      const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+      assertThat(measureCalls.length).isEqualTo(1);
+      const eventParams = measureCalls[0][2];
+      assertThat(eventParams.amount).isEqualTo(scenario.expectedAmount);
+      assertThat(eventParams.amount_regular_unit).isUndefined();
+
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
 - name: '[Event ID] Passes event_id in suplementaryData'
   code: |-
     mockData.eventId = 'evt-abc-123';
@@ -1649,5 +1744,11 @@ setup: |-
 
 ___NOTES___
 
-Created on 11/25/2025, 10:44:33 AM
+2026-05-06 - Change Notes:
+  - Convert all auto-mapped amount and item price values to the currency's lowest unit (e.g. 45.00 USD → 4500) via a new `convertCurrencyValueToMinorUnit()` helper supporting 2-decimal, zero-decimal, and 3-decimal currencies
+  - Add `amount_regular_unit` to the Event Parameters table for auto-conversion to lowest unit; `amount` (already in lowest unit, no conversion) takes precedence if both are provided
+  - Fix currency resolution in `addUAEventParameters` to resolve currency before iterating products so the correct multiplier is applied per item
+  - Fix currency resolution in `addGA4EventParameters` to also check `eventParameters.currency` and the top-level data layer `currency` key
+  - Clarify Amount help text to state auto-mapped values are always treated as regular unit; add documentation links label to the Event Parameters section
 
+Created on 11/25/2025, 10:44:33 AM
