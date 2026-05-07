@@ -90,3 +90,6 @@ Enable **JS SDK Debugging Logs** to have the OpenAI SDK print debug messages to 
 ## Open Source
 
 The **OpenAI Ads Pixel for Google Tag Manager Web** is developed and maintained by the [Stape Team](https://stape.io/) under the Apache 2.0 license.
+
+### GTM Gallery Status
+🔴 Not listed
