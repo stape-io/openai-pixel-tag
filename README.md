@@ -4,8 +4,8 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 
 ## How to Use
 
-1. Add the **OpenAI Ads Pixel by Stape** tag to your Web GTM container.
-2. Enter your **OpenAI Pixel ID** from your ad account. Only one Pixel ID per page is supported.
+1. Add the **OpenAI Ads Pixel by Stape** tag to your GTM container from the [GTM Template Gallery](https://tagmanager.google.com/gallery/#/owners/stape-io/templates/openai-pixel-tag).
+2. Enter your **OpenAI Pixel ID** from your ad account. Only one Pixel ID is supported on the page where the Pixel is loaded.
 3. Choose how the **Event Name** is defined:
    - **Inherit from DataLayer** — maps GTM/GA4 event names to OpenAI Pixel equivalents.
    - **Override** — choose from a list of standard events or provide a custom event name.
