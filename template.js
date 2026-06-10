@@ -71,20 +71,30 @@ function getOrCreateQueue() {
 }
 
 function sendEvent(data, isManualOrGCMConsentGranted) {
-  const initData = { pixelId: data.pixelId, debug: data.debugEnabled };
-  runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
-    const queue = getOrCreateQueue();
-    queue('init', initData);
-  });
+  getUserData(data, isManualOrGCMConsentGranted, (userData) => {
+    const initData = {
+      pixelId: data.pixelId,
+      debug: data.debugEnabled
+    };
+    if (objHasProps(userData)) initData.user = userData;
 
-  const eventNameInfo = getEventNameInfo(data);
-  const eventName = eventNameInfo.eventName;
-  const eventParameters = getEventParameters(data, eventName);
-  const suplementaryData = { event_id: data.eventId ? makeString(data.eventId) : undefined };
-  if (eventName === 'custom') suplementaryData.custom_event_name = eventNameInfo.customEventName;
-  runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
-    const queue = getOrCreateQueue();
-    queue('measure', eventName, eventParameters, suplementaryData);
+    runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
+      const queue = getOrCreateQueue();
+      queue('init', initData);
+    });
+
+    const eventNameInfo = getEventNameInfo(data);
+    const eventName = eventNameInfo.eventName;
+    const eventParameters = getEventParameters(data, eventName);
+    const supplementaryData = {
+      event_id: data.eventId ? makeString(data.eventId) : undefined,
+      opt_out: data.optOut === true || data.optOut === false ? data.optOut : false
+    };
+    if (eventName === 'custom') supplementaryData.custom_event_name = eventNameInfo.customEventName;
+    runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
+      const queue = getOrCreateQueue();
+      queue('measure', eventName, eventParameters, supplementaryData);
+    });
   });
 }
 
@@ -124,6 +134,67 @@ function getEventNameInfo(data) {
   return data.eventName === 'standard'
     ? { eventName: data.eventNameStandard }
     : { eventName: 'custom', customEventName: data.eventNameCustom };
+}
+
+function getUserData(data, isManualOrGCMConsentGranted, onDone) {
+  if (!data.enableAdvancedMatching) {
+    onDone();
+    return;
+  }
+
+  let userData = {};
+
+  if (data.enableEventUserDataEnhancement) {
+    userData = getEventUserDataEnhancement(isManualOrGCMConsentGranted);
+  }
+
+  if (data.enableDataLayerMapping) {
+    const userDataFromDataLayer = copyFromDataLayerWithVersion('user_data');
+    if (getType(userDataFromDataLayer) === 'object') {
+      addUserData(userData, userDataFromDataLayer, true);
+    }
+  }
+
+  if (getType(data.userDataFromVariable) === 'object') {
+    addUserData(userData, data.userDataFromVariable, false);
+  }
+
+  if (data.userDataList && data.userDataList.length) {
+    assign(userData, makeTableMap(data.userDataList, 'name', 'value'));
+  }
+
+  if (objIsEmptyOrContainsOnlyFalsyValues(userData)) {
+    onDone();
+    return;
+  }
+
+  hashDataIfNeeded(userData, (hashedUserData) => {
+    if (data.enableEventUserDataEnhancement) {
+      storeEventUserDataEnhancement(isManualOrGCMConsentGranted, hashedUserData);
+    }
+    onDone(hashedUserData);
+  });
+}
+
+function hashDataIfNeeded(userData, onDone) {
+  const hashableKeys = ['email_sha256', 'external_id_sha256'];
+  const fieldsToHash = {};
+
+  hashableKeys.forEach((key) => {
+    if (userData[key] && !isHashed(userData[key])) {
+      fieldsToHash[key] = userData[key];
+    }
+  });
+
+  if (!objHasProps(fieldsToHash)) {
+    onDone(userData);
+    return;
+  }
+
+  hashUserDataFields(fieldsToHash, (hashedFields) => {
+    assign(userData, hashedFields);
+    onDone(userData);
+  });
 }
 
 function getEventParametersType(eventName) {
@@ -184,6 +255,84 @@ function getEventParameters(data, eventName) {
   return eventParameters;
 }
 
+function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
+  if (!isManualOrGCMConsentGranted || !localStorage) return {};
+
+  const gtmeec = localStorage.getItem('gtmeec-oa');
+  if (gtmeec) {
+    const gtmeecParsed = JSON.parse(gtmeec);
+    if (getType(gtmeecParsed) === 'object') return gtmeecParsed;
+  }
+
+  return {};
+}
+
+function normalizeBasedOnSchemaKey(schemaKey, identifier) {
+  if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
+  else if (schemaKey === 'external_id_sha256') return trim(identifier);
+  else return identifier;
+}
+
+function hashUserDataFields(userData, onDone) {
+  const canUseHashSync = getType(copyFromWindow('dataTag256')) === 'function';
+  const userDataHashed = {};
+  const fieldsNormalized = {};
+
+  Object.keys(userData).forEach((fieldName) => {
+    const value = userData[fieldName];
+    if (value === undefined || value === null || value === '') return;
+    if (isHashed(value)) {
+      userDataHashed[fieldName] = value;
+      return;
+    }
+    fieldsNormalized[fieldName] = makeString(normalizeBasedOnSchemaKey(fieldName, value));
+  });
+
+  const fieldNamesToHash = Object.keys(fieldsNormalized);
+
+  if (canUseHashSync) {
+    fieldNamesToHash.forEach((fieldName) => {
+      userDataHashed[fieldName] = callInWindow('dataTag256', fieldsNormalized[fieldName], 'HEX');
+    });
+    onDone(userDataHashed);
+    return;
+  } else {
+    let pendingHashes = fieldNamesToHash.length;
+
+    if (pendingHashes === 0) {
+      onDone(userDataHashed);
+      return;
+    }
+
+    fieldNamesToHash.forEach((fieldName) => {
+      sha256(
+        fieldsNormalized[fieldName],
+        (digest) => {
+          userDataHashed[fieldName] = digest;
+          if (--pendingHashes === 0) onDone(userDataHashed);
+        },
+        () => {
+          userDataHashed[fieldName] = undefined;
+          if (--pendingHashes === 0) onDone(userDataHashed);
+        },
+        { outputEncoding: 'hex' }
+      );
+    });
+  }
+}
+
+function storeUserDataInLocalStorage(userData) {
+  if (!localStorage || !objHasProps(userData)) return;
+
+  const gtmeec = JSON.stringify(userData);
+  localStorage.setItem('gtmeec-oa', gtmeec);
+}
+
+function storeEventUserDataEnhancement(isManualOrGCMConsentGranted, userData) {
+  if (!isManualOrGCMConsentGranted || !localStorage || !objHasProps(userData)) return;
+  storeUserDataInLocalStorage(userData);
+}
+
 function pushEventIdToDataLayer(data) {
   if (!data.pushEventIdToDataLayer) return;
 
@@ -193,6 +342,67 @@ function pushEventIdToDataLayer(data) {
     eventId: data.eventId,
     event: data.eventIdDataLayerEventName || 'openAIPixelDataLayerPush'
   });
+}
+
+function addUserData(userData, userDataFrom, useDL) {
+  let email =
+    userDataFrom.email ||
+    userDataFrom.email_address ||
+    userDataFrom.em ||
+    userDataFrom.sha256_email_address ||
+    userDataFrom.email_sha256;
+  const emailType = getType(email);
+  if (emailType === 'array' || emailType === 'object') email = email[0];
+  if (email) userData.email_sha256 = email;
+
+  const externalId =
+    userDataFrom.external_id ||
+    userDataFrom.user_id ||
+    userDataFrom.userId ||
+    (useDL
+      ? copyFromDataLayerWithVersion('external_id') ||
+        copyFromDataLayerWithVersion('user_id') ||
+        copyFromDataLayerWithVersion('userId') ||
+        undefined
+      : undefined);
+  if (externalId) userData.external_id_sha256 = externalId;
+
+  const city =
+    userDataFrom.city ||
+    userDataFrom.ct ||
+    (userDataFrom.address && userDataFrom.address.city ? userDataFrom.address.city : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].city
+      ? userDataFrom.address[0].city
+      : undefined);
+  if (city) userData.city = city;
+
+  const zip =
+    userDataFrom.zip ||
+    userDataFrom.postal_code ||
+    userDataFrom.zp ||
+    (userDataFrom.address && userDataFrom.address.postal_code
+      ? userDataFrom.address.postal_code
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].postal_code
+      ? userDataFrom.address[0].postal_code
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address.zip ? userDataFrom.address.zip : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].zip
+      ? userDataFrom.address[0].zip
+      : undefined);
+  if (zip) userData.zip_code = zip;
+
+  const country =
+    userDataFrom.country ||
+    (userDataFrom.address && userDataFrom.address.country
+      ? userDataFrom.address.country
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].country
+      ? userDataFrom.address[0].country
+      : undefined);
+  if (country) userData.country = country;
+
+  return userData;
 }
 
 function addUAEventParameters(eventName, eventParameters, ecommerce) {
@@ -350,6 +560,36 @@ function assign(target, source) {
     target[key] = source[key];
   });
   return target;
+}
+
+function objHasProps(obj) {
+  return getType(obj) === 'object' && Object.keys(obj).length > 0;
+}
+
+function objIsEmptyOrContainsOnlyFalsyValues(obj) {
+  if (getType(obj) !== 'object') return;
+  const objValues = Object.values(obj);
+  if (objValues.length === 0 || objValues.every((v) => !v)) return true;
+}
+
+function isHashed(value) {
+  if (!value) return false;
+  return makeString(value).match('^[A-Fa-f0-9]{64}$') !== null;
+}
+
+function normalizeEmail(email) {
+  if (!email) return;
+  return removeWhiteSpace(makeString(email)).toLowerCase();
+}
+
+function removeWhiteSpace(input) {
+  if (!input) return;
+  return makeString(input).split(' ').join('');
+}
+
+function trim(input) {
+  if (!input) return;
+  return makeString(input).trim();
 }
 
 function copyFromDataLayerWithVersion(key) {
