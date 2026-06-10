@@ -171,9 +171,9 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "CHECKBOX",
         "name": "enableDataLayerMapping",
-        "checkboxText": "Enable automatic Event Parameters mapping from the Data Layer",
+        "checkboxText": "Enable automatic User Data and Event Parameters mapping from the Data Layer",
         "simpleValueType": true,
-        "help": "If enabled, the tag will map standard Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e (the tag always considers the auto-mapped value to be in the currency regular unit and it converts to the lowest unit according to the currency): GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n or  UA \u003ci\u003eecommerce[action].products[].id\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
+        "help": "If enabled, the tag will map standard User Data and Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e (the tag always considers the auto-mapped value to be in the currency regular unit and it converts to the lowest unit according to the currency): GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\n\u003cb\u003eUser Data\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eEmail Address\u003c/b\u003e: \u003ci\u003eemail\u003c/i\u003e, \u003ci\u003esha256_email_address\u003c/i\u003e, \u003ci\u003eemail_sha256\u003c/i\u003e, \u003ci\u003eemail_address\u003c/i\u003e, \u003ci\u003eemail\u003c/i\u003e or \u003ci\u003eem\u003c/i\u003e keys from  \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eExternal ID SHA256 Hashed\u003c/b\u003e: \u003ci\u003euser_id\u003c/i\u003e, \u003ci\u003euserId\u003c/i\u003e or \u003ci\u003eexternal_id\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCity\u003c/b\u003e: \u003ci\u003ecity\u003c/i\u003e, \u003ci\u003ect\u003c/i\u003e, \u003ci\u003eaddress.city\u003c/i\u003e or \u003ci\u003eaddress[0].city\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eZIP Code\u003c/b\u003e: \u003ci\u003ezip\u003c/i\u003e, \u003ci\u003epostal_code\u003c/i\u003e, \u003ci\u003ezp\u003c/i\u003e, \u003ci\u003eaddress.postal_code\u003c/i\u003e, \u003ci\u003eaddress[0].postal_code\u003c/i\u003e, \u003ci\u003eaddress.zip\u003c/i\u003e or \u003ci\u003eaddress[0].zip\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCountry\u003c/b\u003e: \u003ci\u003ecountry\u003c/i\u003e, \u003ci\u003eaddress.country\u003c/i\u003e, or \u003ci\u003eaddress[0].country\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
         "defaultValue": true,
         "subParams": [
           {
@@ -190,6 +190,31 @@ ___TEMPLATE_PARAMETERS___
                 "type": "EQUALS"
               }
             ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "enableAdvancedMatching",
+            "checkboxText": "Enable Advanced Matching",
+            "simpleValueType": true,
+            "help": "Advanced Matching helps you optimize your ads and drive performance by matching User Data with people on OpenAI platforms. User Data can be shared with any event to attribute more conversions, build bigger audiences and improve campaign optimization.",
+            "subParams": [
+              {
+                "type": "CHECKBOX",
+                "name": "enableEventUserDataEnhancement",
+                "checkboxText": "Enable Event User Data Enhancement",
+                "simpleValueType": true,
+                "help": "Enable the use of \u003ci\u003elocalStorage\u003c/i\u003e to store data for enhanced User Data tracking.\n\u003cbr/\u003e\u003cbr/\u003e\nNote: If the \u003ci\u003eEnable automatic User Data and Event Parameters mapping from the Data Layer\u003c/i\u003e option is selected, all User Data found in the Data Layer will be stored, not just the fields explicitly defined in the User Data section.\n\u003cbr/\u003e\u003cbr/\u003e\nThis feature is a convenience and is not part of the default Pixel behavior. It\u0027s integrated with the \u003ci\u003eConsent Settings\u003c/i\u003e below.",
+                "enablingConditions": [
+                  {
+                    "paramName": "enableAdvancedMatching",
+                    "paramValue": true,
+                    "type": "EQUALS"
+                  }
+                ]
+              }
+            ],
+            "defaultValue": true,
+            "alwaysInSummary": true
           }
         ],
         "alwaysInSummary": true
@@ -202,6 +227,25 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Consent Settings",
     "groupStyle": "ZIPPY_OPEN_ON_PARAM",
     "subParams": [
+      {
+        "type": "SELECT",
+        "name": "optOut",
+        "displayName": "Opt Out",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": true,
+            "displayValue": "true"
+          },
+          {
+            "value": false,
+            "displayValue": "false"
+          }
+        ],
+        "simpleValueType": true,
+        "help": "Set to \u003cb\u003etrue\u003c/b\u003e to opt out the event from future user-level personalization.",
+        "notSetText": "(not set)"
+      },
       {
         "type": "SELECT",
         "name": "consentGranted",
@@ -218,7 +262,7 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "help": "Setting Consent Granted to \u003cb\u003efalse\u003c/b\u003e will prevent the pixel from sending hits until the tag is fired with Consent Granted set to \u003cb\u003etrue\u003c/b\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nValues that are considered Consent Granted equal to \u003cb\u003efalse\u003c/b\u003e: \u003ci\u003efalse\u003c/i\u003e, \u003ci\u003e\"false\"\u003c/i\u003e, \u003ci\u003e0\u003c/i\u003e, \u003ci\u003e\"0\"\u003c/i\u003e and \u003ci\u003e\"denied\"\u003c/i\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nAny other value will be considered Consent Granted equal to \u003cb\u003etrue\u003c/b\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nIf Consent Granted is \u003cb\u003efalse\u003c/b\u003e, the tag will not load the JS SDK, and it will prevent events from being sent until user consent is explicitly granted. After consent is Consent Granted is \u003cb\u003etrue\u003c/b\u003e on the page, the JS SDK will load and events that were previously queued in the page before consent was granted will be sent.\n\u003cbr/\u003e\u003cbr/\u003e\nIf Consent Granted is \u003cb\u003etrue\u003c/b\u003e (initially or later), the tag will load the JS SDK and send events.",
+        "help": "Setting Consent Granted to \u003cb\u003efalse\u003c/b\u003e will prevent the pixel from sending hits until the tag is fired with Consent Granted set to \u003cb\u003etrue\u003c/b\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nValues that are considered Consent Granted equal to \u003cb\u003efalse\u003c/b\u003e: \u003ci\u003efalse\u003c/i\u003e, \u003ci\u003e\"false\"\u003c/i\u003e, \u003ci\u003e0\u003c/i\u003e, \u003ci\u003e\"0\"\u003c/i\u003e and \u003ci\u003e\"denied\"\u003c/i\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nAny other value will be considered Consent Granted equal to \u003cb\u003etrue\u003c/b\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nIf Consent Granted is \u003cb\u003efalse\u003c/b\u003e, the tag will not load the JS SDK, and it will prevent events from being sent until user consent is explicitly granted. After consent Consent Granted is set to \u003cb\u003etrue\u003c/b\u003e on the page, the JS SDK will load and events that were previously queued in the page before consent was granted will be sent.\n\u003cbr/\u003e\u003cbr/\u003e\nIf Consent Granted is \u003cb\u003etrue\u003c/b\u003e (initially or later), the tag will load the JS SDK and send events.",
         "enablingConditions": [
           {
             "paramName": "enableGoogleConsentMode",
@@ -233,6 +277,90 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Enable Google Consent Mode support",
         "simpleValueType": true,
         "help": "When enabled, this tag checks for the Google Consent Mode \u003ci\u003ead_storage\u003c/i\u003e consent. \n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003ci\u003ead_storage\u003c/i\u003e consent is \u003cb\u003edenied\u003c/b\u003e, the tag will not load the JS SDK, and it will prevent events from being sent until user consent is explicitly granted. After consent is \u003cb\u003egranted\u003c/b\u003e on the page, the JS SDK will load and events that were previously queued in the page before consent was granted will be sent.\n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003ci\u003ead_storage\u003c/i\u003e consent is \u003cb\u003egranted\u003c/b\u003e (initially or later), the tag will load the JS SDK and send events."
+      }
+    ]
+  },
+  {
+    "displayName": "User Data",
+    "name": "userDataGroup",
+    "groupStyle": "ZIPPY_OPEN_ON_PARAM",
+    "type": "GROUP",
+    "subParams": [
+      {
+        "type": "LABEL",
+        "name": "userDataLabel",
+        "displayName": "Check these help pages \u003ca href\u003d\"https://developers.openai.com/ads/measurement-pixel\"\u003e[1]\u003c/a\u003e and \u003ca href\u003d\"https://developers.openai.com/ads/supported-events\"\u003e[2]\u003c/a\u003e for a description of each \u003ci\u003eUser Data Parameters\u003c/i\u003e and their expected type and value.\u003cbr/\u003e\u003cbr/\u003e"
+      },
+      {
+        "type": "SELECT",
+        "name": "userDataFromVariable",
+        "displayName": "Load Parameters From Variable",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": false,
+            "displayValue": "False"
+          }
+        ],
+        "simpleValueType": true,
+        "help": "You can use a standard User-Provided Data variable or create a variable that returns a JavaScript object containing the desired User Data parameters. This object will merge with additional parameters from the table below, with any conflicts resolved in favor of the table entries."
+      },
+      {
+        "name": "userDataList",
+        "simpleTableColumns": [
+          {
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ],
+            "displayName": "Parameter Name",
+            "name": "name",
+            "isUnique": true,
+            "type": "SELECT",
+            "selectItems": [
+              {
+                "value": "email_sha256",
+                "displayValue": "Email Address"
+              },
+              {
+                "value": "external_id_sha256",
+                "displayValue": "External ID SHA256 Hashed"
+              },
+              {
+                "value": "city",
+                "displayValue": "City"
+              },
+              {
+                "value": "zip_code",
+                "displayValue": "ZIP Code"
+              },
+              {
+                "value": "country",
+                "displayValue": "Country"
+              }
+            ],
+            "defaultValue": ""
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Parameter Value",
+            "name": "value",
+            "type": "TEXT",
+            "valueValidators": []
+          }
+        ],
+        "type": "SIMPLE_TABLE",
+        "newRowButtonText": "Add Parameter",
+        "displayName": "User Identifiers Parameters",
+        "help": "The tag will automatically hash parameters that need it, pre-hashed data is also accepted. Parameters that require hashing:\n\u003cbr/\u003e\n\u003cul\u003e\n\u003cli\u003eEmail Address\u003c/li\u003e\n\u003cli\u003eExternal ID SHA256 Hashed\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\nMake sure to normalize their values prior to hashing when passing already hashed values."
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "enableAdvancedMatching",
+        "paramValue": true,
+        "type": "EQUALS"
       }
     ]
   },
@@ -306,7 +434,9 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add parameter"
+        "newRowButtonText": "Add Parameter",
+        "displayName": "Event Parameters",
+        "help": "Only use one of the available Amount parameters. If both are set, \u003cb\u003eAmount (in the currency\u0027s lowest unit)\u003c/b\u003e will have preference.\n\u003cbr/\u003e\n\u003cb\u003eAmount (in the currency\u0027s lowest unit)\u003c/b\u003e must be an integer in the currency\u0027s lowest denomination (e.g. cents). Example: \u003ci\u003e12999\u003c/i\u003e for \u003ci\u003e$129.99\u003c/i\u003e.\n\u003cbr/\u003e\n\u003cb\u003eAmount (in the currency\u0027s regular unit)\u003c/b\u003e must be a number in the currency\u0027s regular denomination. Example: \u003ci\u003e129.99\u003c/i\u003e for \u003ci\u003e$129.99\u003c/i\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eCurrency\u003c/b\u003e is required if \u003cb\u003eAmount\u003c/b\u003e is used.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eContents\u003c/b\u003e expects an array of content objects. Each object can have the properties: \u003cb\u003eid\u003c/b\u003e, \u003cb\u003ename\u003c/b\u003e, \u003cb\u003eamount\u003c/b\u003e, \u003cb\u003ecurrency\u003c/b\u003e (required if \u003ci\u003eamount\u003c/i\u003e is present in the content object and \u003ci\u003ecurrency\u003c/i\u003e is not present in top level field), \u003cb\u003equantity\u003c/b\u003e and \u003cb\u003econtent_type\u003c/b\u003e (required)."
       }
     ]
   },
@@ -346,7 +476,7 @@ ___TEMPLATE_PARAMETERS___
             "name": "pushEventIdToDataLayer",
             "checkboxText": "Push event to DataLayer with the Event ID",
             "simpleValueType": true,
-            "help": "It\u0027s helpful for easier events deduplication with the server.-side event. You can use this event to trigger the tag that send data to the server container and forward the correct Event ID.",
+            "help": "It\u0027s helpful for easier events deduplication with the server-side event. You can use this event to trigger the tag that send data to the server container and forward the correct Event ID.",
             "defaultValue": false
           },
           {
@@ -486,20 +616,30 @@ function getOrCreateQueue() {
 }
 
 function sendEvent(data, isManualOrGCMConsentGranted) {
-  const initData = { pixelId: data.pixelId, debug: data.debugEnabled };
-  runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
-    const queue = getOrCreateQueue();
-    queue('init', initData);
-  });
+  getUserData(data, isManualOrGCMConsentGranted, (userData) => {
+    const initData = {
+      pixelId: data.pixelId,
+      debug: data.debugEnabled
+    };
+    if (objHasProps(userData)) initData.user = userData;
 
-  const eventNameInfo = getEventNameInfo(data);
-  const eventName = eventNameInfo.eventName;
-  const eventParameters = getEventParameters(data, eventName);
-  const suplementaryData = { event_id: data.eventId ? makeString(data.eventId) : undefined };
-  if (eventName === 'custom') suplementaryData.custom_event_name = eventNameInfo.customEventName;
-  runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
-    const queue = getOrCreateQueue();
-    queue('measure', eventName, eventParameters, suplementaryData);
+    runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
+      const queue = getOrCreateQueue();
+      queue('init', initData);
+    });
+
+    const eventNameInfo = getEventNameInfo(data);
+    const eventName = eventNameInfo.eventName;
+    const eventParameters = getEventParameters(data, eventName);
+    const supplementaryData = {
+      event_id: data.eventId ? makeString(data.eventId) : undefined,
+      opt_out: data.optOut === true || data.optOut === false ? data.optOut : false
+    };
+    if (eventName === 'custom') supplementaryData.custom_event_name = eventNameInfo.customEventName;
+    runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
+      const queue = getOrCreateQueue();
+      queue('measure', eventName, eventParameters, supplementaryData);
+    });
   });
 }
 
@@ -539,6 +679,67 @@ function getEventNameInfo(data) {
   return data.eventName === 'standard'
     ? { eventName: data.eventNameStandard }
     : { eventName: 'custom', customEventName: data.eventNameCustom };
+}
+
+function getUserData(data, isManualOrGCMConsentGranted, onDone) {
+  if (!data.enableAdvancedMatching) {
+    onDone();
+    return;
+  }
+
+  let userData = {};
+
+  if (data.enableEventUserDataEnhancement) {
+    userData = getEventUserDataEnhancement(isManualOrGCMConsentGranted);
+  }
+
+  if (data.enableDataLayerMapping) {
+    const userDataFromDataLayer = copyFromDataLayerWithVersion('user_data');
+    if (getType(userDataFromDataLayer) === 'object') {
+      addUserData(userData, userDataFromDataLayer, true);
+    }
+  }
+
+  if (getType(data.userDataFromVariable) === 'object') {
+    addUserData(userData, data.userDataFromVariable, false);
+  }
+
+  if (data.userDataList && data.userDataList.length) {
+    assign(userData, makeTableMap(data.userDataList, 'name', 'value'));
+  }
+
+  if (objIsEmptyOrContainsOnlyFalsyValues(userData)) {
+    onDone();
+    return;
+  }
+
+  hashDataIfNeeded(userData, (hashedUserData) => {
+    if (data.enableEventUserDataEnhancement) {
+      storeEventUserDataEnhancement(isManualOrGCMConsentGranted, hashedUserData);
+    }
+    onDone(hashedUserData);
+  });
+}
+
+function hashDataIfNeeded(userData, onDone) {
+  const hashableKeys = ['email_sha256', 'external_id_sha256'];
+  const fieldsToHash = {};
+
+  hashableKeys.forEach((key) => {
+    if (userData[key] && !isHashed(userData[key])) {
+      fieldsToHash[key] = userData[key];
+    }
+  });
+
+  if (!objHasProps(fieldsToHash)) {
+    onDone(userData);
+    return;
+  }
+
+  hashUserDataFields(fieldsToHash, (hashedFields) => {
+    assign(userData, hashedFields);
+    onDone(userData);
+  });
 }
 
 function getEventParametersType(eventName) {
@@ -599,6 +800,84 @@ function getEventParameters(data, eventName) {
   return eventParameters;
 }
 
+function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
+  if (!isManualOrGCMConsentGranted || !localStorage) return {};
+
+  const gtmeec = localStorage.getItem('gtmeec-oa');
+  if (gtmeec) {
+    const gtmeecParsed = JSON.parse(gtmeec);
+    if (getType(gtmeecParsed) === 'object') return gtmeecParsed;
+  }
+
+  return {};
+}
+
+function normalizeBasedOnSchemaKey(schemaKey, identifier) {
+  if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
+  else if (schemaKey === 'external_id_sha256') return trim(identifier);
+  else return identifier;
+}
+
+function hashUserDataFields(userData, onDone) {
+  const canUseHashSync = getType(copyFromWindow('dataTag256')) === 'function';
+  const userDataHashed = {};
+  const fieldsNormalized = {};
+
+  Object.keys(userData).forEach((fieldName) => {
+    const value = userData[fieldName];
+    if (value === undefined || value === null || value === '') return;
+    if (isHashed(value)) {
+      userDataHashed[fieldName] = value;
+      return;
+    }
+    fieldsNormalized[fieldName] = makeString(normalizeBasedOnSchemaKey(fieldName, value));
+  });
+
+  const fieldNamesToHash = Object.keys(fieldsNormalized);
+
+  if (canUseHashSync) {
+    fieldNamesToHash.forEach((fieldName) => {
+      userDataHashed[fieldName] = callInWindow('dataTag256', fieldsNormalized[fieldName], 'HEX');
+    });
+    onDone(userDataHashed);
+    return;
+  } else {
+    let pendingHashes = fieldNamesToHash.length;
+
+    if (pendingHashes === 0) {
+      onDone(userDataHashed);
+      return;
+    }
+
+    fieldNamesToHash.forEach((fieldName) => {
+      sha256(
+        fieldsNormalized[fieldName],
+        (digest) => {
+          userDataHashed[fieldName] = digest;
+          if (--pendingHashes === 0) onDone(userDataHashed);
+        },
+        () => {
+          userDataHashed[fieldName] = undefined;
+          if (--pendingHashes === 0) onDone(userDataHashed);
+        },
+        { outputEncoding: 'hex' }
+      );
+    });
+  }
+}
+
+function storeUserDataInLocalStorage(userData) {
+  if (!localStorage || !objHasProps(userData)) return;
+
+  const gtmeec = JSON.stringify(userData);
+  localStorage.setItem('gtmeec-oa', gtmeec);
+}
+
+function storeEventUserDataEnhancement(isManualOrGCMConsentGranted, userData) {
+  if (!isManualOrGCMConsentGranted || !localStorage || !objHasProps(userData)) return;
+  storeUserDataInLocalStorage(userData);
+}
+
 function pushEventIdToDataLayer(data) {
   if (!data.pushEventIdToDataLayer) return;
 
@@ -608,6 +887,67 @@ function pushEventIdToDataLayer(data) {
     eventId: data.eventId,
     event: data.eventIdDataLayerEventName || 'openAIPixelDataLayerPush'
   });
+}
+
+function addUserData(userData, userDataFrom, useDL) {
+  let email =
+    userDataFrom.email ||
+    userDataFrom.email_address ||
+    userDataFrom.em ||
+    userDataFrom.sha256_email_address ||
+    userDataFrom.email_sha256;
+  const emailType = getType(email);
+  if (emailType === 'array' || emailType === 'object') email = email[0];
+  if (email) userData.email_sha256 = email;
+
+  const externalId =
+    userDataFrom.external_id ||
+    userDataFrom.user_id ||
+    userDataFrom.userId ||
+    (useDL
+      ? copyFromDataLayerWithVersion('external_id') ||
+        copyFromDataLayerWithVersion('user_id') ||
+        copyFromDataLayerWithVersion('userId') ||
+        undefined
+      : undefined);
+  if (externalId) userData.external_id_sha256 = externalId;
+
+  const city =
+    userDataFrom.city ||
+    userDataFrom.ct ||
+    (userDataFrom.address && userDataFrom.address.city ? userDataFrom.address.city : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].city
+      ? userDataFrom.address[0].city
+      : undefined);
+  if (city) userData.city = city;
+
+  const zip =
+    userDataFrom.zip ||
+    userDataFrom.postal_code ||
+    userDataFrom.zp ||
+    (userDataFrom.address && userDataFrom.address.postal_code
+      ? userDataFrom.address.postal_code
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].postal_code
+      ? userDataFrom.address[0].postal_code
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address.zip ? userDataFrom.address.zip : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].zip
+      ? userDataFrom.address[0].zip
+      : undefined);
+  if (zip) userData.zip_code = zip;
+
+  const country =
+    userDataFrom.country ||
+    (userDataFrom.address && userDataFrom.address.country
+      ? userDataFrom.address.country
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].country
+      ? userDataFrom.address[0].country
+      : undefined);
+  if (country) userData.country = country;
+
+  return userData;
 }
 
 function addUAEventParameters(eventName, eventParameters, ecommerce) {
@@ -765,6 +1105,36 @@ function assign(target, source) {
     target[key] = source[key];
   });
   return target;
+}
+
+function objHasProps(obj) {
+  return getType(obj) === 'object' && Object.keys(obj).length > 0;
+}
+
+function objIsEmptyOrContainsOnlyFalsyValues(obj) {
+  if (getType(obj) !== 'object') return;
+  const objValues = Object.values(obj);
+  if (objValues.length === 0 || objValues.every((v) => !v)) return true;
+}
+
+function isHashed(value) {
+  if (!value) return false;
+  return makeString(value).match('^[A-Fa-f0-9]{64}$') !== null;
+}
+
+function normalizeEmail(email) {
+  if (!email) return;
+  return removeWhiteSpace(makeString(email)).toLowerCase();
+}
+
+function removeWhiteSpace(input) {
+  if (!input) return;
+  return makeString(input).split(' ').join('');
+}
+
+function trim(input) {
+  if (!input) return;
+  return makeString(input).trim();
 }
 
 function copyFromDataLayerWithVersion(key) {
@@ -1162,6 +1532,7 @@ scenarios:
     assertThat(measureCalls[0][1]).isEqualTo('page_viewed');
     assertThat(measureCalls[0][2].type).isEqualTo('contents');
     assertThat(measureCalls[0][3].event_id).isUndefined();
+    assertThat(measureCalls[0][3].opt_out).isTrue();
     assertThat(measureCalls[0][3].custom_event_name).isUndefined();
 
     assertThat(injectScriptCalls.length).isEqualTo(1);
@@ -1656,6 +2027,138 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Unhashed email and externalId are hashed before init
+    call'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [
+        { name: 'email_sha256', value: 'user@Example.com' },
+        { name: 'external_id_sha256', value: '  user123  ' }
+      ]
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user).isDefined();
+    // sha256 mock returns 'hashed_' + normalizedValue; email is lowercased+trimmed, externalId is trimmed
+    assertThat(user.email_sha256).isEqualTo('hashed_user@example.com');
+    assertThat(user.external_id_sha256).isEqualTo('hashed_user123');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Already-hashed email and externalId pass through without
+    re-hashing'
+  code: |-
+    const alreadyHashedEmail = 'b4c9a289323b21a01c3e940f150eb9b8c542587f1abfd8f0e1cc1ffc5e475514';
+    const alreadyHashedId    = '73d83a078369bb4f0971b317aa7797a91cf5c0df1b62161c2e47d75c33ab5b6e';
+
+    let sha256CallCount = 0;
+    mock('sha256', (input, successCb) => {
+      sha256CallCount++;
+      successCb('hashed_' + input);
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [
+        { name: 'email_sha256', value: alreadyHashedEmail },
+        { name: 'external_id_sha256', value: alreadyHashedId }
+      ]
+    });
+
+    runCode(testData);
+
+    assertThat(sha256CallCount).isEqualTo(0);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user.email_sha256).isEqualTo(alreadyHashedEmail);
+    assertThat(user.external_id_sha256).isEqualTo(alreadyHashedId);
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Sync hash path (dataTag256) produces correct user on
+    init call'
+  code: |-
+    mock('copyFromWindow', (key) => {
+      if (key === 'oaiq') return mockQueue;
+      if (key === 'dataTag256') return (value) => 'sync_hashed_' + value;
+      return undefined;
+    });
+    mock('callInWindow', (fnName, value) => {
+      if (fnName === 'dataTag256') return 'sync_hashed_' + value;
+      return undefined;
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [{ name: 'email_sha256', value: 'sync@example.com' }]
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user.email_sha256).isEqualTo('sync_hashed_sync@example.com');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Non-hashable fields (city, country, zip_code) are never
+    altered'
+  code: |-
+    let sha256CallCount = 0;
+    mock('sha256', (input, successCb) => {
+      sha256CallCount++;
+      successCb('hashed_' + input);
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [
+        { name: 'city', value: 'San Francisco' },
+        { name: 'country', value: 'US' },
+        { name: 'zip_code', value: '94107' }
+      ]
+    });
+
+    runCode(testData);
+
+    assertThat(sha256CallCount).isEqualTo(0);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user.city).isEqualTo('San Francisco');
+    assertThat(user.country).isEqualTo('US');
+    assertThat(user.zip_code).isEqualTo('94107');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] storeEventUserDataEnhancement stores hashed userData
+    when enhancement is enabled'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      enableEventUserDataEnhancement: true,
+      userDataList: [{ name: 'email_sha256', value: 'store@example.com' }]
+    });
+
+    runCode(testData);
+
+    const stored = localStorageData['gtmeec-oa'];
+    assertThat(stored).isDefined();
+    const parsed = JSON.parse(stored);
+    // sha256 mock: 'hashed_' + normalizedValue; email normalizes to lowercase trimmed
+    assertThat(parsed.email_sha256).isEqualTo('hashed_store@example.com');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
 setup: |-
   const JSON = require('JSON');
   const Object = require('Object');
@@ -1726,6 +2229,7 @@ setup: |-
 
   const mockData = {
     pixelId: 'PIXEL123',
+    optOut: true,
     consentGranted: true,
     enableGoogleConsentMode: false,
     eventNameSetupMethod: 'override',
@@ -1744,6 +2248,12 @@ setup: |-
 
 ___NOTES___
 
+2026-06-10 - Change Notes:
+  - Add User Data support
+  - Add `opt_out` parameter to Consent Settings to allow opting events out of user-level personalization
+  - Restructure User Data section into a dedicated group, shown only when Advanced Matching is enabled; update Data Layer Mapping label and help text to clarify it also maps User Data fields
+  - Improve UI texts
+
 2026-05-06 - Change Notes:
   - Convert all auto-mapped amount and item price values to the currency's lowest unit (e.g. 45.00 USD → 4500) via a new `convertCurrencyValueToMinorUnit()` helper supporting 2-decimal, zero-decimal, and 3-decimal currencies
   - Add `amount_regular_unit` to the Event Parameters table for auto-conversion to lowest unit; `amount` (already in lowest unit, no conversion) takes precedence if both are provided
@@ -1752,3 +2262,4 @@ ___NOTES___
   - Clarify Amount help text to state auto-mapped values are always treated as regular unit; add documentation links label to the Event Parameters section
 
 Created on 11/25/2025, 10:44:33 AM
+
