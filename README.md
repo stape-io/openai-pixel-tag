@@ -108,6 +108,7 @@ Enable **JS SDK Debugging Logs** to have the OpenAI SDK print debug messages to 
 
 ## Useful Resources
 
+- [Advertising in ChatGPT: how to track ChatGPT Ads’ performance](https://stape.io/blog/chatgpt-ads-tracking)
 - [OpenAI Docs: OpenAI Ads Measurement Pixel](https://developers.openai.com/ads/measurement-pixel)
 - [OpenAI Docs: Supported Events](https://developers.openai.com/ads/supported-events)
 
