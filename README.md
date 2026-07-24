@@ -19,8 +19,9 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 
 ## Event Name Setup Options
 
-- **Standard Events** (when overriding):
+- **Standard Events**:
   - `page_viewed`, `appointment_scheduled`, `checkout_started`, `contents_viewed`, `items_added`, `lead_created`, `order_created`, `registration_completed`, `subscription_created`, `trial_started`
+  - Regardless of setup method (**Inherit from DataLayer** or **Override**), the resolved event name is checked against this list: a match is sent as that standard event, otherwise it's sent as a `custom` event with the original name set as `custom_event_name`.
 - **Inherit from DataLayer** (default):
   - Maps GA4, Stape, and GTM4WP event names to their OpenAI Pixel equivalents:
 
@@ -35,7 +36,7 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 | `generate_lead` | `lead_created` |
 | `sign_up`, `sign_up_stape` | `registration_completed` |
 
-Any unmapped event name is forwarded as a `custom` event with the original name set as `custom_event_name`.
+Any DataLayer event name without a mapping above (or an **Override** custom event name) is forwarded as-is: sent as a standard event if it matches the Standard Events list, otherwise sent as a `custom` event with the original name set as `custom_event_name`.
 
 ## Required Fields
 

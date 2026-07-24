@@ -81,7 +81,7 @@ ___TEMPLATE_PARAMETERS___
                   {
                     "type": "SELECT",
                     "name": "eventNameStandard",
-                    "macrosInSelect": false,
+                    "macrosInSelect": true,
                     "selectItems": [
                       {
                         "value": "page_viewed",
@@ -644,6 +644,25 @@ function sendEvent(data, isManualOrGCMConsentGranted) {
 }
 
 function getEventNameInfo(data) {
+  const STANDARD_EVENT_NAMES = [
+    'page_viewed',
+    'appointment_scheduled',
+    'checkout_started',
+    'contents_viewed',
+    'items_added',
+    'lead_created',
+    'order_created',
+    'registration_completed',
+    'subscription_created',
+    'trial_started'
+  ];
+
+  const toEventNameInfo = (eventName) => {
+    return STANDARD_EVENT_NAMES.indexOf(eventName) !== -1
+      ? { eventName: eventName }
+      : { eventName: 'custom', customEventName: eventName };
+  };
+
   if (data.eventNameSetupMethod === 'inherit') {
     const eventName = copyFromDataLayer('event');
 
@@ -670,15 +689,12 @@ function getEventNameInfo(data) {
       'gtm4wp.orderCompletedEEC': 'order_created'
     };
 
-    if (ga4ToOpenAIEventName[eventName]) {
-      return { eventName: ga4ToOpenAIEventName[eventName] };
-    }
-    return { eventName: 'custom', customEventName: eventName };
+    return toEventNameInfo(ga4ToOpenAIEventName[eventName] || eventName);
   }
 
-  return data.eventName === 'standard'
-    ? { eventName: data.eventNameStandard }
-    : { eventName: 'custom', customEventName: data.eventNameCustom };
+  return toEventNameInfo(
+    data.eventName === 'standard' ? data.eventNameStandard : data.eventNameCustom
+  );
 }
 
 function getUserData(data, isManualOrGCMConsentGranted, onDone) {
@@ -1733,6 +1749,24 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Event Name] Custom name matching a standard name is normalized to that standard
+    event'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      eventNameSetupMethod: 'override',
+      eventName: 'custom',
+      eventNameCustom: 'order_created'
+    });
+
+    runCode(testData);
+
+    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    assertThat(measureCalls.length).isEqualTo(1);
+    assertThat(measureCalls[0][1]).isEqualTo('order_created');
+    assertThat(measureCalls[0][3].custom_event_name).isUndefined();
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
 - name: '[Event Parameters Type] Correct type is set per event name'
   code: |-
     [
@@ -2247,6 +2281,10 @@ setup: |-
 
 
 ___NOTES___
+
+2026-07-24 - Change Notes:
+  - Normalize event name resolution so both Inherit and Override setup methods send a standard event whenever the resolved name matches the Standard Events list, and fall back to a `custom` event otherwise; previously this normalization only applied to the Inherit path
+  - Allow selecting a GTM variable for the standard Event Name dropdown.
 
 2026-06-10 - Change Notes:
   - Add User Data support
