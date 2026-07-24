@@ -99,6 +99,25 @@ function sendEvent(data, isManualOrGCMConsentGranted) {
 }
 
 function getEventNameInfo(data) {
+  const STANDARD_EVENT_NAMES = [
+    'page_viewed',
+    'appointment_scheduled',
+    'checkout_started',
+    'contents_viewed',
+    'items_added',
+    'lead_created',
+    'order_created',
+    'registration_completed',
+    'subscription_created',
+    'trial_started'
+  ];
+
+  const toEventNameInfo = (eventName) => {
+    return STANDARD_EVENT_NAMES.indexOf(eventName) !== -1
+      ? { eventName: eventName }
+      : { eventName: 'custom', customEventName: eventName };
+  };
+
   if (data.eventNameSetupMethod === 'inherit') {
     const eventName = copyFromDataLayer('event');
 
@@ -125,15 +144,12 @@ function getEventNameInfo(data) {
       'gtm4wp.orderCompletedEEC': 'order_created'
     };
 
-    if (ga4ToOpenAIEventName[eventName]) {
-      return { eventName: ga4ToOpenAIEventName[eventName] };
-    }
-    return { eventName: 'custom', customEventName: eventName };
+    return toEventNameInfo(ga4ToOpenAIEventName[eventName] || eventName);
   }
 
-  return data.eventName === 'standard'
-    ? { eventName: data.eventNameStandard }
-    : { eventName: 'custom', customEventName: data.eventNameCustom };
+  return toEventNameInfo(
+    data.eventName === 'standard' ? data.eventNameStandard : data.eventNameCustom
+  );
 }
 
 function getUserData(data, isManualOrGCMConsentGranted, onDone) {
