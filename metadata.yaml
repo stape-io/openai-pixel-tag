@@ -1,6 +1,8 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/openai-pixel-tag'
 versions:
+  - sha: 6e79ffe5a44da77892d4d95bcbca8ebac36e1d89
+    changeNotes: Update icon/logos.
   - sha: ab8900c0f0e13347ab5cb731d9f6cfdc763ec4ab
     changeNotes: Normalize event name resolution across setup methods.
   - sha: e4f02f0a51f31ba5a7cee333198f62dd1f63cb2b
