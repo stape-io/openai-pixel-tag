@@ -43,15 +43,15 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "pixelId",
-        "displayName": "OpenAI Pixel ID",
+        "displayName": "OpenAI Pixel ID(s)",
         "simpleValueType": true,
-        "valueHint": "1N4xBuB...",
+        "valueHint": "1N4xBuB...,NhcVRGx6...",
         "valueValidators": [
           {
             "type": "NON_EMPTY"
           }
         ],
-        "help": "Add your OpenAI Pixel ID from your ad account. Currently, only one Pixel ID is supported on the page.",
+        "help": "Add your OpenAI Pixel ID from your ad account.\n\u003c/br\u003e\nArray, single item string or comma separated string of Pixel IDs.",
         "alwaysInSummary": true
       },
       {
@@ -166,7 +166,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "defaultValue": "override",
         "alwaysInSummary": true,
-        "help": "\u003cb\u003eInherit from DataLayer\u003c/b\u003e\n\u003c/br\u003e\u003c/br\u003e\nThe following mappings will be applied to convert \u003ci\u003eData Layer event name\u003c/i\u003e into the Pixel \u003ci\u003eEvent Name\u003c/i\u003e equivalent:\n\u003cbr/\u003e\u003cbr/\u003e \n\u003cul\u003e\n\u003cli\u003e\u003ci\u003epage_view\u003c/i\u003e, \u003ci\u003egtm.dom\u003c/i\u003e and \u003ci\u003epage_view_stape\u003c/i\u003e → \u003ci\u003epage_viewed\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eview_item\u003c/i\u003e, \u003ci\u003eview_item_stape\u003c/i\u003e and \u003ci\u003egtm4wp.productClickEEC\u003c/i\u003e → \u003ci\u003econtents_viewed\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eadd_to_cart\u003c/i\u003e, \u003ci\u003eadd_to_cart_stape\u003c/i\u003e and \u003ci\u003egtm4wp.addProductToCartEEC\u003c/i\u003e → \u003ci\u003eitems_added\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003ebegin_checkout\u003c/i\u003e, \u003ci\u003ebegin_checkout_stape\u003c/i\u003e and \u003ci\u003egtm4wp.checkoutStepEEC\u003c/i\u003e → \u003ci\u003echeckout_started\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003epurchase\u003c/i\u003e, \u003ci\u003epurchase_stape\u003c/i\u003e and \u003ci\u003egtm4wp.orderCompletedEEC\u003c/i\u003e → \u003ci\u003eorder_created\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003egenerate_lead\u003c/i\u003e → \u003ci\u003elead_created\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003esign_up\u003c/i\u003e and \u003ci\u003esign_up_stape\u003c/i\u003e → \u003ci\u003eregistration_completed\u003c/i\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\nPlease note that it provides partial event mapping. Not all GA4 events can be mapped to the Pixel Event Names."
+        "help": "\u003cb\u003eInherit from DataLayer\u003c/b\u003e\n\u003c/br\u003e\u003c/br\u003e\nThe following mappings will be applied to convert \u003ci\u003eData Layer event name\u003c/i\u003e into the Pixel \u003ci\u003eEvent Name\u003c/i\u003e equivalent:\n\u003cbr/\u003e\u003cbr/\u003e \n\u003cul\u003e\n\u003cli\u003e\u003ci\u003epage_view\u003c/i\u003e, \u003ci\u003egtm.init\u003c/i\u003e, \u003ci\u003egtm.js\u003c/i\u003e, \u003ci\u003egtm.historyChange\u003c/i\u003e, \u003ci\u003egtm.dom\u003c/i\u003e and \u003ci\u003epage_view_stape\u003c/i\u003e → \u003ci\u003epage_viewed\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eview_item\u003c/i\u003e, \u003ci\u003eview_item_stape\u003c/i\u003e and \u003ci\u003egtm4wp.productClickEEC\u003c/i\u003e → \u003ci\u003econtents_viewed\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eadd_to_cart\u003c/i\u003e, \u003ci\u003eadd_to_cart_stape\u003c/i\u003e and \u003ci\u003egtm4wp.addProductToCartEEC\u003c/i\u003e → \u003ci\u003eitems_added\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003ebegin_checkout\u003c/i\u003e, \u003ci\u003ebegin_checkout_stape\u003c/i\u003e and \u003ci\u003egtm4wp.checkoutStepEEC\u003c/i\u003e → \u003ci\u003echeckout_started\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003epurchase\u003c/i\u003e, \u003ci\u003epurchase_stape\u003c/i\u003e and \u003ci\u003egtm4wp.orderCompletedEEC\u003c/i\u003e → \u003ci\u003eorder_created\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003egenerate_lead\u003c/i\u003e → \u003ci\u003elead_created\u003c/i\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci\u003esign_up\u003c/i\u003e and \u003ci\u003esign_up_stape\u003c/i\u003e → \u003ci\u003eregistration_completed\u003c/i\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\nPlease note that it provides partial event mapping. Not all events can be mapped to the OpenAI Pixel Event Names."
       },
       {
         "type": "CHECKBOX",
@@ -587,10 +587,15 @@ const isManualOrGCMConsentGranted = data.enableGoogleConsentMode
   ? isConsentGranted('ad_storage')
   : !isManualConsentDenied;
 
+const pixelIds = getPixelIds(data);
+if (pixelIds.length === 0) {
+  return gtmOnFailure();
+}
+
 // Manual: only reaches here with consent granted.
 // GCM: reaches here in any case (granted or denied)
 getOrCreateQueue();
-sendEvent(data, isManualOrGCMConsentGranted);
+sendEvent(data, isManualOrGCMConsentGranted, pixelIds);
 pushEventIdToDataLayer(data);
 
 runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
@@ -615,17 +620,25 @@ function getOrCreateQueue() {
   return createArgumentsQueue(QUEUE_NAME, QUEUE_NAME + '.q');
 }
 
-function sendEvent(data, isManualOrGCMConsentGranted) {
+function getPixelIds(data) {
+  const pixelIds = getType(data.pixelId) === 'string' ? data.pixelId.split(',') : data.pixelId;
+  if (getType(pixelIds) !== 'array') return [];
+
+  return pixelIds.map((p) => makeString(p).trim()).filter((p) => p);
+}
+
+function sendEvent(data, isManualOrGCMConsentGranted, pixelIds) {
   getUserData(data, isManualOrGCMConsentGranted, (userData) => {
     const initData = {
-      pixelId: data.pixelId,
       debug: data.debugEnabled
     };
     if (objHasProps(userData)) initData.user = userData;
 
     runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
       const queue = getOrCreateQueue();
-      queue('init', initData);
+      pixelIds.forEach((pixelId) => {
+        queue('init', assign({ pixelId: pixelId }, initData));
+      });
     });
 
     const eventNameInfo = getEventNameInfo(data);
@@ -638,7 +651,9 @@ function sendEvent(data, isManualOrGCMConsentGranted) {
     if (eventName === 'custom') supplementaryData.custom_event_name = eventNameInfo.customEventName;
     runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
       const queue = getOrCreateQueue();
-      queue('measure', eventName, eventParameters, supplementaryData);
+      pixelIds.forEach((pixelId) => {
+        queue('measureSingle', pixelId, eventName, eventParameters, supplementaryData);
+      });
     });
   });
 }
@@ -668,6 +683,9 @@ function getEventNameInfo(data) {
 
     const ga4ToOpenAIEventName = {
       page_view: 'page_viewed',
+      'gtm.init': 'page_viewed',
+      'gtm.js': 'page_viewed',
+      'gtm.historyChange': 'page_viewed',
       'gtm.dom': 'page_viewed',
       add_to_cart: 'items_added',
       sign_up: 'registration_completed',
@@ -1543,13 +1561,14 @@ scenarios:
     assertThat(initCalls[0][1].debug).isFalse();
     assertThat(initCalls[0][1].user).isUndefined();
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][1]).isEqualTo('page_viewed');
     assertThat(measureCalls[0][2].type).isEqualTo('contents');
     assertThat(measureCalls[0][3].event_id).isUndefined();
     assertThat(measureCalls[0][3].opt_out).isTrue();
     assertThat(measureCalls[0][3].custom_event_name).isUndefined();
+    assertThat(measureCalls[0][4]).isEqualTo('PIXEL123');
 
     assertThat(injectScriptCalls.length).isEqualTo(1);
     assertThat(injectScriptCalls[0].url).isEqualTo('https://bzrcdn.openai.com/sdk/oaiq.min.js');
@@ -1557,6 +1576,61 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Multiple Pixel IDs] Comma-separated string sends init and measureSingle
+    per Pixel ID'
+  code: |-
+    const testData = assign(assign({}, mockData), { pixelId: 'PIXEL_A, PIXEL_B ,,PIXEL_C' });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(3);
+    assertThat(initCalls[0][1].pixelId).isEqualTo('PIXEL_A');
+    assertThat(initCalls[1][1].pixelId).isEqualTo('PIXEL_B');
+    assertThat(initCalls[2][1].pixelId).isEqualTo('PIXEL_C');
+
+    const measureCalls = getMeasureCalls();
+    assertThat(measureCalls.length).isEqualTo(3);
+    assertThat(measureCalls[0][4]).isEqualTo('PIXEL_A');
+    assertThat(measureCalls[1][4]).isEqualTo('PIXEL_B');
+    assertThat(measureCalls[2][4]).isEqualTo('PIXEL_C');
+    assertThat(measureCalls[0][1]).isEqualTo('page_viewed');
+    assertThat(measureCalls[1][1]).isEqualTo('page_viewed');
+    assertThat(measureCalls[2][1]).isEqualTo('page_viewed');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Multiple Pixel IDs] Array value sends init and measureSingle per Pixel ID'
+  code: |-
+    const testData = assign(assign({}, mockData), { pixelId: ['PIXEL_A', ' PIXEL_B ', ''] });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(2);
+    assertThat(initCalls[0][1].pixelId).isEqualTo('PIXEL_A');
+    assertThat(initCalls[1][1].pixelId).isEqualTo('PIXEL_B');
+
+    const measureCalls = getMeasureCalls();
+    assertThat(measureCalls.length).isEqualTo(2);
+    assertThat(measureCalls[0][4]).isEqualTo('PIXEL_A');
+    assertThat(measureCalls[1][4]).isEqualTo('PIXEL_B');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Multiple Pixel IDs] Missing or empty Pixel ID calls gtmOnFailure'
+  code: |-
+    [undefined, '', ',,', []].forEach((value) => {
+      queueCalls = [];
+      injectScriptCalls = [];
+
+      const testData = assign(assign({}, mockData), { pixelId: value });
+      runCode(testData);
+
+      assertThat(queueCalls.length).isEqualTo(0);
+      assertThat(injectScriptCalls.length).isEqualTo(0);
+      assertApi('gtmOnFailure').wasCalled();
+    });
 - name: '[Consent] Manual consent denied values call gtmOnSuccess without sending
     events'
   code: |-
@@ -1607,7 +1681,7 @@ scenarios:
     const initCalls = queueCalls.filter((c) => c[0] === 'init');
     assertThat(initCalls.length).isEqualTo(1);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
 
     assertThat(injectScriptCalls.length).isEqualTo(1);
@@ -1658,6 +1732,9 @@ scenarios:
     [
       { dlEvent: 'page_view', expected: 'page_viewed' },
       { dlEvent: 'gtm.dom', expected: 'page_viewed' },
+      { dlEvent: 'gtm.init', expected: 'page_viewed' },
+      { dlEvent: 'gtm.js', expected: 'page_viewed' },
+      { dlEvent: 'gtm.historyChange', expected: 'page_viewed' },
       { dlEvent: 'add_to_cart', expected: 'items_added' },
       { dlEvent: 'sign_up', expected: 'registration_completed' },
       { dlEvent: 'begin_checkout', expected: 'checkout_started' },
@@ -1686,7 +1763,7 @@ scenarios:
 
       runCode(testData);
 
-      const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+      const measureCalls = getMeasureCalls();
       assertThat(measureCalls.length).isEqualTo(1);
       assertThat(measureCalls[0][1]).isEqualTo(scenario.expected);
       assertApi('gtmOnSuccess').wasCalled();
@@ -1702,7 +1779,7 @@ scenarios:
 
     runCode(mockData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][1]).isEqualTo('custom');
     assertThat(measureCalls[0][3].custom_event_name).isEqualTo('my_unmapped_event');
@@ -1719,7 +1796,7 @@ scenarios:
 
     runCode(testData1);
 
-    let measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    let measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][1]).isEqualTo('order_created');
     assertThat(measureCalls[0][3].custom_event_name).isUndefined();
@@ -1742,7 +1819,7 @@ scenarios:
 
     runCode(testData2);
 
-    measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][1]).isEqualTo('custom');
     assertThat(measureCalls[0][3].custom_event_name).isEqualTo('MyCustomEvent');
@@ -1760,7 +1837,7 @@ scenarios:
 
     runCode(testData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][1]).isEqualTo('order_created');
     assertThat(measureCalls[0][3].custom_event_name).isUndefined();
@@ -1800,7 +1877,7 @@ scenarios:
 
       runCode(testData);
 
-      const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+      const measureCalls = getMeasureCalls();
       assertThat(measureCalls.length).isEqualTo(1);
       assertThat(measureCalls[0][2].type).isEqualTo(scenario.expectedType);
       assertApi('gtmOnSuccess').wasCalled();
@@ -1825,7 +1902,7 @@ scenarios:
 
     runCode(testData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     const eventParams = measureCalls[0][2];
     assertThat(eventParams.type).isEqualTo('contents');
@@ -1862,7 +1939,7 @@ scenarios:
 
     runCode(testData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     const eventParams = measureCalls[0][2];
     assertThat(eventParams.contents.length).isEqualTo(2);
@@ -1890,7 +1967,7 @@ scenarios:
 
     runCode(testData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     const eventParams = measureCalls[0][2];
     assertThat(eventParams.contents.length).isEqualTo(1);
     assertThat(eventParams.contents[0].id).isEqualTo('UA1');
@@ -1907,7 +1984,7 @@ scenarios:
 
     runCode(testData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     const eventParams = measureCalls[0][2];
     assertThat(eventParams.plan_id).isEqualTo('premium');
     assertThat(eventParams.value).isEqualTo(99);
@@ -1937,7 +2014,7 @@ scenarios:
 
       runCode(testData);
 
-      const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+      const measureCalls = getMeasureCalls();
       assertThat(measureCalls.length).isEqualTo(1);
       const eventParams = measureCalls[0][2];
       assertThat(eventParams.amount).isEqualTo(scenario.expectedAmount);
@@ -1952,7 +2029,7 @@ scenarios:
 
     runCode(mockData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls.length).isEqualTo(1);
     assertThat(measureCalls[0][3].event_id).isEqualTo('evt-abc-123');
     assertThat(measureCalls[0][3].custom_event_name).isUndefined();
@@ -1970,7 +2047,7 @@ scenarios:
 
     runCode(mockData);
 
-    const measureCalls = queueCalls.filter((c) => c[0] === 'measure');
+    const measureCalls = getMeasureCalls();
     assertThat(measureCalls[0][3].event_id).isEqualTo('evt-xyz');
     assertThat(measureCalls[0][3].custom_event_name).isEqualTo('some_unmapped_event');
 
@@ -2204,6 +2281,13 @@ setup: |-
     return target;
   };
 
+  // measureSingle calls are (pixelId, eventName, eventData, options); remap them
+  // to the pre-multi-pixel (eventName, eventData, options, pixelId) shape so
+  // existing assertions on index [1]/[2]/[3] keep working, with pixelId appended at [4].
+  const getMeasureCalls = () => queueCalls
+    .filter((c) => c[0] === 'measureSingle')
+    .map((c) => ['measure', c[2], c[3], c[4], c[1]]);
+
   // Mock oaiq queue — captures all calls made to the pixel queue
   let queueCalls = [];
   const mockQueue = function() {
@@ -2282,6 +2366,10 @@ setup: |-
 
 ___NOTES___
 
+2026-08-13 - Change Notes:
+  - Add other data layer event names to automapping in "Inherit from DataLayer". Review your tag setup if you use this option in the Event Name Setup Method field.
+  - Add support to multiple Pixel IDs in a single tag.
+
 2026-08-06 - Change Notes:
   - Update tag icon/logo
   
@@ -2303,5 +2391,4 @@ ___NOTES___
   - Clarify Amount help text to state auto-mapped values are always treated as regular unit; add documentation links label to the Event Parameters section
 
 Created on 11/25/2025, 10:44:33 AM
-
 
