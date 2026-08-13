@@ -1,6 +1,8 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/openai-pixel-tag'
 versions:
+  - sha: 4d98af00451906321dd5c4b6bd84c5b983332f4c
+    changeNotes: Support multiple Pixel IDs and add other data layer event names to automapping in Inherit from DataLayer.
   - sha: 6e79ffe5a44da77892d4d95bcbca8ebac36e1d89
     changeNotes: Update icon/logos.
   - sha: ab8900c0f0e13347ab5cb731d9f6cfdc763ec4ab
