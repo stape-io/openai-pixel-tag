@@ -42,10 +42,15 @@ const isManualOrGCMConsentGranted = data.enableGoogleConsentMode
   ? isConsentGranted('ad_storage')
   : !isManualConsentDenied;
 
+const pixelIds = getPixelIds(data);
+if (pixelIds.length === 0) {
+  return gtmOnFailure();
+}
+
 // Manual: only reaches here with consent granted.
 // GCM: reaches here in any case (granted or denied)
 getOrCreateQueue();
-sendEvent(data, isManualOrGCMConsentGranted);
+sendEvent(data, isManualOrGCMConsentGranted, pixelIds);
 pushEventIdToDataLayer(data);
 
 runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
@@ -70,17 +75,25 @@ function getOrCreateQueue() {
   return createArgumentsQueue(QUEUE_NAME, QUEUE_NAME + '.q');
 }
 
-function sendEvent(data, isManualOrGCMConsentGranted) {
+function getPixelIds(data) {
+  const pixelIds = getType(data.pixelId) === 'string' ? data.pixelId.split(',') : data.pixelId;
+  if (getType(pixelIds) !== 'array') return [];
+
+  return pixelIds.map((p) => makeString(p).trim()).filter((p) => p);
+}
+
+function sendEvent(data, isManualOrGCMConsentGranted, pixelIds) {
   getUserData(data, isManualOrGCMConsentGranted, (userData) => {
     const initData = {
-      pixelId: data.pixelId,
       debug: data.debugEnabled
     };
     if (objHasProps(userData)) initData.user = userData;
 
     runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
       const queue = getOrCreateQueue();
-      queue('init', initData);
+      pixelIds.forEach((pixelId) => {
+        queue('init', assign({ pixelId: pixelId }, initData));
+      });
     });
 
     const eventNameInfo = getEventNameInfo(data);
@@ -93,7 +106,9 @@ function sendEvent(data, isManualOrGCMConsentGranted) {
     if (eventName === 'custom') supplementaryData.custom_event_name = eventNameInfo.customEventName;
     runOnConsentGranted('ad_storage', isManualOrGCMConsentGranted, () => {
       const queue = getOrCreateQueue();
-      queue('measure', eventName, eventParameters, supplementaryData);
+      pixelIds.forEach((pixelId) => {
+        queue('measureSingle', pixelId, eventName, eventParameters, supplementaryData);
+      });
     });
   });
 }
@@ -123,6 +138,9 @@ function getEventNameInfo(data) {
 
     const ga4ToOpenAIEventName = {
       page_view: 'page_viewed',
+      'gtm.init': 'page_viewed',
+      'gtm.js': 'page_viewed',
+      'gtm.historyChange': 'page_viewed',
       'gtm.dom': 'page_viewed',
       add_to_cart: 'items_added',
       sign_up: 'registration_completed',

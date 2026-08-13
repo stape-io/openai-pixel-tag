@@ -5,7 +5,7 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 ## How to Use
 
 1. Add the **OpenAI Ads Pixel by Stape** tag to your GTM container from the [GTM Template Gallery](https://tagmanager.google.com/gallery/#/owners/stape-io/templates/openai-pixel-tag).
-2. Enter your **OpenAI Pixel ID** from your ad account. Only one Pixel ID is supported on the page where the Pixel is loaded.
+2. Enter your **OpenAI Pixel ID(s)** from your ad account. Accepts a single ID, an array, or a comma-separated string to support more than one Pixel ID on the page.
 3. Choose how the **Event Name** is defined:
    - **Inherit from DataLayer** — maps GTM/GA4 event names to OpenAI Pixel equivalents.
    - **Override** — choose from a list of standard events or provide a custom event name.
@@ -27,7 +27,7 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 
 | DataLayer Event | OpenAI Pixel Event |
 |---|---|
-| `page_view`, `gtm.dom`, `page_view_stape` | `page_viewed` |
+| `page_view`, `gtm.init`, `gtm.js`, `gtm.historyChange`, `gtm.dom`, `page_view_stape` | `page_viewed` |
 | `view_item`, `view_item_stape`, `gtm4wp.productClickEEC` | `contents_viewed` |
 | `add_to_cart`, `add_to_cart_stape`, `gtm4wp.addProductToCartEEC` | `items_added` |
 | `begin_checkout`, `begin_checkout_stape`, `gtm4wp.checkoutStepEEC` | `checkout_started` |
