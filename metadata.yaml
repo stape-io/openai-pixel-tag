@@ -1,6 +1,8 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/openai-pixel-tag'
 versions:
+  - sha: 994da5bff77c8c90abf89a3506cd500a562ec7c4
+    changeNotes: Add Advanced Matching support for phone, first/last name and region.
   - sha: 4d98af00451906321dd5c4b6bd84c5b983332f4c
     changeNotes: Support multiple Pixel IDs and add other data layer event names to automapping in Inherit from DataLayer.
   - sha: 6e79ffe5a44da77892d4d95bcbca8ebac36e1d89

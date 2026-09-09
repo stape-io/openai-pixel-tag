@@ -173,7 +173,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "enableDataLayerMapping",
         "checkboxText": "Enable automatic User Data and Event Parameters mapping from the Data Layer",
         "simpleValueType": true,
-        "help": "If enabled, the tag will map standard User Data and Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e (the tag always considers the auto-mapped value to be in the currency regular unit and it converts to the lowest unit according to the currency): GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\n\u003cb\u003eUser Data\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eEmail Address\u003c/b\u003e: \u003ci\u003eemail\u003c/i\u003e, \u003ci\u003esha256_email_address\u003c/i\u003e, \u003ci\u003eemail_sha256\u003c/i\u003e, \u003ci\u003eemail_address\u003c/i\u003e, \u003ci\u003eemail\u003c/i\u003e or \u003ci\u003eem\u003c/i\u003e keys from  \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eExternal ID SHA256 Hashed\u003c/b\u003e: \u003ci\u003euser_id\u003c/i\u003e, \u003ci\u003euserId\u003c/i\u003e or \u003ci\u003eexternal_id\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCity\u003c/b\u003e: \u003ci\u003ecity\u003c/i\u003e, \u003ci\u003ect\u003c/i\u003e, \u003ci\u003eaddress.city\u003c/i\u003e or \u003ci\u003eaddress[0].city\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eZIP Code\u003c/b\u003e: \u003ci\u003ezip\u003c/i\u003e, \u003ci\u003epostal_code\u003c/i\u003e, \u003ci\u003ezp\u003c/i\u003e, \u003ci\u003eaddress.postal_code\u003c/i\u003e, \u003ci\u003eaddress[0].postal_code\u003c/i\u003e, \u003ci\u003eaddress.zip\u003c/i\u003e or \u003ci\u003eaddress[0].zip\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCountry\u003c/b\u003e: \u003ci\u003ecountry\u003c/i\u003e, \u003ci\u003eaddress.country\u003c/i\u003e, or \u003ci\u003eaddress[0].country\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
+        "help": "If enabled, the tag will map standard User Data and Event Parameters automatically from the Data Layer.\n\u003cbr/\u003e\u003cbr/\u003e\nThe tag parses the Universal Analytics,  \u003ca href\u003d\"https://developers.google.com/analytics/devguides/collection/ga4/ecommerce\"\u003eGA4\u003c/a\u003e and \u003ca href\u003d\"https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data\"\u003eCommon Event Data\u003c/a\u003e formats.\n\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eEvent Parameters\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eContents\u003c/b\u003e: GA4 \u003ci\u003eitem[]\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[]\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eAmount\u003c/b\u003e (the tag always considers the auto-mapped value to be in the currency regular unit and it converts to the lowest unit according to the currency): GA4 \u003ci\u003evalue\u003c/i\u003e or UA \u003ci\u003eecommerce[action].revenue\u003c/i\u003e from Data Layer, or Sum of GA4 \u003ci\u003eitem[].quantity\u003c/i\u003e * \u003ci\u003eitem[].price\u003c/i\u003e or  UA \u003ci\u003eecommerce[action].products[].quantity\u003c/i\u003e * \u003ci\u003eecommerce[action].products[].price\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCurrency\u003c/b\u003e: GA4 \u003ci\u003eitem[0].currency\u003c/i\u003e or GA4 \u003ci\u003ecurrency\u003c/i\u003e or  UA \u003ci\u003eecommerce.currencyCode\u003c/i\u003e from Data Layer\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\n\u003cb\u003eUser Data\u003c/b\u003e auto-mapped parameters:\n\u003cul\u003e\n\u003cli\u003e\u003cb\u003eEmail Address\u003c/b\u003e: \u003ci\u003eemail\u003c/i\u003e, \u003ci\u003esha256_email_address\u003c/i\u003e, \u003ci\u003eemail_sha256\u003c/i\u003e, \u003ci\u003eemail_address\u003c/i\u003e, \u003ci\u003eemail\u003c/i\u003e or \u003ci\u003eem\u003c/i\u003e keys from  \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eExternal ID SHA256 Hashed\u003c/b\u003e: \u003ci\u003euser_id\u003c/i\u003e, \u003ci\u003euserId\u003c/i\u003e or \u003ci\u003eexternal_id\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003ePhone Number\u003c/b\u003e: \u003ci\u003ephone_number\u003c/i\u003e, \u003ci\u003ephone\u003c/i\u003e or \u003ci\u003eph\u003c/i\u003e keys from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eFirst Name\u003c/b\u003e: \u003ci\u003efirst_name\u003c/i\u003e, \u003ci\u003efirstName\u003c/i\u003e or \u003ci\u003efn\u003c/i\u003e keys from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eLast Name\u003c/b\u003e: \u003ci\u003elast_name\u003c/i\u003e, \u003ci\u003elastName\u003c/i\u003e or \u003ci\u003eln\u003c/i\u003e keys from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCity\u003c/b\u003e: \u003ci\u003ecity\u003c/i\u003e, \u003ci\u003ect\u003c/i\u003e, \u003ci\u003eaddress.city\u003c/i\u003e or \u003ci\u003eaddress[0].city\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eZIP Code\u003c/b\u003e: \u003ci\u003ezip\u003c/i\u003e, \u003ci\u003epostal_code\u003c/i\u003e, \u003ci\u003ezp\u003c/i\u003e, \u003ci\u003eaddress.postal_code\u003c/i\u003e, \u003ci\u003eaddress[0].postal_code\u003c/i\u003e, \u003ci\u003eaddress.zip\u003c/i\u003e or \u003ci\u003eaddress[0].zip\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eCountry\u003c/b\u003e: \u003ci\u003ecountry\u003c/i\u003e, \u003ci\u003eaddress.country\u003c/i\u003e, or \u003ci\u003eaddress[0].country\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003cli\u003e\u003cb\u003eRegion\u003c/b\u003e: \u003ci\u003eregion\u003c/i\u003e, \u003ci\u003estate\u003c/i\u003e, \u003ci\u003est\u003c/i\u003e, \u003ci\u003eaddress.region\u003c/i\u003e, \u003ci\u003eaddress[0].region\u003c/i\u003e, \u003ci\u003eaddress.state\u003c/i\u003e or \u003ci\u003eaddress[0].state\u003c/i\u003e keys from the Data Layer or from the \u003ci\u003euser_data\u003c/i\u003e object in the Data Layer\u003c/li\u003e\n\u003c/ul\u003e",
         "defaultValue": true,
         "subParams": [
           {
@@ -190,33 +190,33 @@ ___TEMPLATE_PARAMETERS___
                 "type": "EQUALS"
               }
             ]
-          },
-          {
-            "type": "CHECKBOX",
-            "name": "enableAdvancedMatching",
-            "checkboxText": "Enable Advanced Matching",
-            "simpleValueType": true,
-            "help": "Advanced Matching helps you optimize your ads and drive performance by matching User Data with people on OpenAI platforms. User Data can be shared with any event to attribute more conversions, build bigger audiences and improve campaign optimization.",
-            "subParams": [
-              {
-                "type": "CHECKBOX",
-                "name": "enableEventUserDataEnhancement",
-                "checkboxText": "Enable Event User Data Enhancement",
-                "simpleValueType": true,
-                "help": "Enable the use of \u003ci\u003elocalStorage\u003c/i\u003e to store data for enhanced User Data tracking.\n\u003cbr/\u003e\u003cbr/\u003e\nNote: If the \u003ci\u003eEnable automatic User Data and Event Parameters mapping from the Data Layer\u003c/i\u003e option is selected, all User Data found in the Data Layer will be stored, not just the fields explicitly defined in the User Data section.\n\u003cbr/\u003e\u003cbr/\u003e\nThis feature is a convenience and is not part of the default Pixel behavior. It\u0027s integrated with the \u003ci\u003eConsent Settings\u003c/i\u003e below.",
-                "enablingConditions": [
-                  {
-                    "paramName": "enableAdvancedMatching",
-                    "paramValue": true,
-                    "type": "EQUALS"
-                  }
-                ]
-              }
-            ],
-            "defaultValue": true,
-            "alwaysInSummary": true
           }
         ],
+        "alwaysInSummary": true
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "enableAdvancedMatching",
+        "checkboxText": "Enable Advanced Matching",
+        "simpleValueType": true,
+        "help": "Advanced Matching helps you optimize your ads and drive performance by matching User Data with people on OpenAI platforms. User Data can be shared with any event to attribute more conversions, build bigger audiences and improve campaign optimization.",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "enableEventUserDataEnhancement",
+            "checkboxText": "Enable Event User Data Enhancement",
+            "simpleValueType": true,
+            "help": "Enable the use of \u003ci\u003elocalStorage\u003c/i\u003e to store data for enhanced User Data tracking.\n\u003cbr/\u003e\u003cbr/\u003e\nNote: If the \u003ci\u003eEnable automatic User Data and Event Parameters mapping from the Data Layer\u003c/i\u003e option is selected, all User Data found in the Data Layer will be stored, not just the fields explicitly defined in the User Data section.\n\u003cbr/\u003e\u003cbr/\u003e\nThis feature is a convenience and is not part of the default Pixel behavior. It\u0027s integrated with the \u003ci\u003eConsent Settings\u003c/i\u003e below.",
+            "enablingConditions": [
+              {
+                "paramName": "enableAdvancedMatching",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ],
+        "defaultValue": true,
         "alwaysInSummary": true
       }
     ]
@@ -328,12 +328,28 @@ ___TEMPLATE_PARAMETERS___
                 "displayValue": "External ID SHA256 Hashed"
               },
               {
+                "value": "phone_number_sha256",
+                "displayValue": "Phone Number"
+              },
+              {
+                "value": "first_name_sha256",
+                "displayValue": "First Name"
+              },
+              {
+                "value": "last_name_sha256",
+                "displayValue": "Last Name"
+              },
+              {
                 "value": "city",
                 "displayValue": "City"
               },
               {
                 "value": "zip_code",
                 "displayValue": "ZIP Code"
+              },
+              {
+                "value": "region",
+                "displayValue": "Region/State"
               },
               {
                 "value": "country",
@@ -756,7 +772,13 @@ function getUserData(data, isManualOrGCMConsentGranted, onDone) {
 }
 
 function hashDataIfNeeded(userData, onDone) {
-  const hashableKeys = ['email_sha256', 'external_id_sha256'];
+  const hashableKeys = [
+    'email_sha256',
+    'external_id_sha256',
+    'phone_number_sha256',
+    'first_name_sha256',
+    'last_name_sha256'
+  ];
   const fieldsToHash = {};
 
   hashableKeys.forEach((key) => {
@@ -849,6 +871,9 @@ function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
 function normalizeBasedOnSchemaKey(schemaKey, identifier) {
   if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
   else if (schemaKey === 'external_id_sha256') return trim(identifier);
+  else if (schemaKey === 'phone_number_sha256') return normalizePhone(identifier);
+  else if (schemaKey === 'first_name_sha256' || schemaKey === 'last_name_sha256')
+    return normalizeName(identifier);
   else return identifier;
 }
 
@@ -946,6 +971,15 @@ function addUserData(userData, userDataFrom, useDL) {
       : undefined);
   if (externalId) userData.external_id_sha256 = externalId;
 
+  const phone = userDataFrom.phone_number || userDataFrom.phone || userDataFrom.ph;
+  if (phone) userData.phone_number_sha256 = phone;
+
+  const firstName = userDataFrom.first_name || userDataFrom.firstName || userDataFrom.fn;
+  if (firstName) userData.first_name_sha256 = firstName;
+
+  const lastName = userDataFrom.last_name || userDataFrom.lastName || userDataFrom.ln;
+  if (lastName) userData.last_name_sha256 = lastName;
+
   const city =
     userDataFrom.city ||
     userDataFrom.ct ||
@@ -980,6 +1014,20 @@ function addUserData(userData, userDataFrom, useDL) {
       ? userDataFrom.address[0].country
       : undefined);
   if (country) userData.country = country;
+
+  const region =
+    userDataFrom.region ||
+    userDataFrom.state ||
+    userDataFrom.st ||
+    (userDataFrom.address && userDataFrom.address.region ? userDataFrom.address.region : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].region
+      ? userDataFrom.address[0].region
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address.state ? userDataFrom.address.state : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].state
+      ? userDataFrom.address[0].state
+      : undefined);
+  if (region) userData.region = region;
 
   return userData;
 }
@@ -1166,6 +1214,32 @@ function removeWhiteSpace(input) {
   return makeString(input).split(' ').join('');
 }
 
+function normalizePhone(phone) {
+  if (!phone) return;
+  let value = makeString(phone);
+  [' ', '\t', '\n', '(', ')', '.', '-'].forEach((char) => {
+    value = value.split(char).join('');
+  });
+  if (value.charAt(0) === '+') value = value.substring(1);
+  while (value.length && value.charAt(0) === '0') value = value.substring(1);
+  return value;
+}
+
+function normalizeName(name) {
+  if (!name) return;
+  // ASCII whitespace and punctuation to strip; non-ASCII characters are preserved.
+  const charsToStrip = [
+    ' ', '\t', '\n', '\r',
+    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
+    ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
+  ];
+  let value = makeString(name).toLowerCase();
+  charsToStrip.forEach((char) => {
+    value = value.split(char).join('');
+  });
+  return value;
+}
+
 function trim(input) {
   if (!input) return;
   return makeString(input).trim();
@@ -1199,7 +1273,6 @@ function convertCurrencyValueToMinorUnit(value, currency) {
 
   return makeInteger(roundValue(value * multiplier));
 }
-
 
 ___WEB_PERMISSIONS___
 
@@ -2161,6 +2234,93 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Unhashed phone, first name and last name are normalized
+    and hashed before init call'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [
+        { name: 'phone_number_sha256', value: '+1 (415) 555-2671' },
+        { name: 'first_name_sha256', value: 'Mary Jane' },
+        { name: 'last_name_sha256', value: "O'Connor" }
+      ]
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user).isDefined();
+    // sha256 mock returns 'hashed_' + normalizedValue
+    assertThat(user.phone_number_sha256).isEqualTo('hashed_14155552671');
+    assertThat(user.first_name_sha256).isEqualTo('hashed_maryjane');
+    assertThat(user.last_name_sha256).isEqualTo('hashed_oconnor');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Hashing] Already-hashed phone, first name and last name pass
+    through without re-hashing'
+  code: |-
+    const alreadyHashedPhone = '45569da57f4b7bf472d7a864ef4781451cae6383fee9fb0ae40c59aa1ce475b7';
+    const alreadyHashedFirstName = '4cfdde69bde68452d2921db3186d45b8bc825df51e16b94b9517471589eb4f6f';
+    const alreadyHashedLastName = '55b5c51f8670181b0454a698c930ee641890c5c80b1e7da87e39a768aa8231ac';
+
+    let sha256CallCount = 0;
+    mock('sha256', (input, successCb) => {
+      sha256CallCount++;
+      successCb('hashed_' + input);
+    });
+
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataList: [
+        { name: 'phone_number_sha256', value: alreadyHashedPhone },
+        { name: 'first_name_sha256', value: alreadyHashedFirstName },
+        { name: 'last_name_sha256', value: alreadyHashedLastName }
+      ]
+    });
+
+    runCode(testData);
+
+    assertThat(sha256CallCount).isEqualTo(0);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user.phone_number_sha256).isEqualTo(alreadyHashedPhone);
+    assertThat(user.first_name_sha256).isEqualTo(alreadyHashedFirstName);
+    assertThat(user.last_name_sha256).isEqualTo(alreadyHashedLastName);
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[User Data Mapping] Phone, first name, last name and region are extracted
+    from a User-Provided Data variable'
+  code: |-
+    const testData = assign(assign({}, mockData), {
+      enableAdvancedMatching: true,
+      userDataFromVariable: {
+        phone_number: '+1 (415) 555-2671',
+        first_name: 'Mary Jane',
+        last_name: "O'Connor",
+        region: 'California'
+      }
+    });
+
+    runCode(testData);
+
+    const initCalls = queueCalls.filter((c) => c[0] === 'init');
+    assertThat(initCalls.length).isEqualTo(1);
+    const user = initCalls[0][1].user;
+    assertThat(user).isDefined();
+    // sha256 mock returns 'hashed_' + normalizedValue
+    assertThat(user.phone_number_sha256).isEqualTo('hashed_14155552671');
+    assertThat(user.first_name_sha256).isEqualTo('hashed_maryjane');
+    assertThat(user.last_name_sha256).isEqualTo('hashed_oconnor');
+    assertThat(user.region).isEqualTo('California');
+
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
 - name: '[User Data Hashing] Already-hashed email and externalId pass through without
     re-hashing'
   code: |-
@@ -2220,8 +2380,8 @@ scenarios:
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
-- name: '[User Data Hashing] Non-hashable fields (city, country, zip_code) are never
-    altered'
+- name: '[User Data Hashing] Non-hashable fields (city, country, zip_code, region)
+    are never altered'
   code: |-
     let sha256CallCount = 0;
     mock('sha256', (input, successCb) => {
@@ -2234,7 +2394,8 @@ scenarios:
       userDataList: [
         { name: 'city', value: 'San Francisco' },
         { name: 'country', value: 'US' },
-        { name: 'zip_code', value: '94107' }
+        { name: 'zip_code', value: '94107' },
+        { name: 'region', value: 'California' }
       ]
     });
 
@@ -2248,6 +2409,7 @@ scenarios:
     assertThat(user.city).isEqualTo('San Francisco');
     assertThat(user.country).isEqualTo('US');
     assertThat(user.zip_code).isEqualTo('94107');
+    assertThat(user.region).isEqualTo('California');
 
     assertApi('gtmOnSuccess').wasCalled();
     assertApi('gtmOnFailure').wasNotCalled();
@@ -2365,6 +2527,11 @@ setup: |-
 
 
 ___NOTES___
+
+2026-09-09 - Change Notes:
+  - Add Advanced Matching support for Phone Number, First Name, and Last Name, automatically normalized and SHA-256 hashed to match the OpenAI Pixel SDK's expanded user-data schema.
+  - Add Region/State as a new plain (non-hashed) Advanced Matching field, alongside City, ZIP Code, and Country.
+  - Extend automatic Data Layer/User-Provided Data mapping and the User Data table dropdown to recognize the new fields (e.g. phone_number/phone/ph, first_name/fn, last_name/ln, region/state/st, including address object/array fallbacks).
 
 2026-08-13 - Change Notes:
   - Add other data layer event names to automapping in "Inherit from DataLayer". Review your tag setup if you use this option in the Event Name Setup Method field.

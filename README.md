@@ -31,7 +31,6 @@ The **OpenAI Ads Pixel by Stape** tag integrates the **[OpenAI (ChatGPT) Ads Pix
 | `view_item`, `view_item_stape`, `gtm4wp.productClickEEC` | `contents_viewed` |
 | `add_to_cart`, `add_to_cart_stape`, `gtm4wp.addProductToCartEEC` | `items_added` |
 | `begin_checkout`, `begin_checkout_stape`, `gtm4wp.checkoutStepEEC` | `checkout_started` |
-| `add_payment_info` | `payment_info` |
 | `purchase`, `purchase_stape`, `gtm4wp.orderCompletedEEC` | `order_created` |
 | `generate_lead` | `lead_created` |
 | `sign_up`, `sign_up_stape` | `registration_completed` |
@@ -47,12 +46,16 @@ Any DataLayer event name without a mapping above (or an **Override** custom even
 
 ### Advanced Matching
 
-Securely enrich events with user identifiers to improve ad attribution. The tag automatically hashes **Email** and **External ID** using SHA256 if the value is not already hashed. Supported fields include:
+Securely enrich events with user identifiers to improve ad attribution. The tag automatically hashes **Email**, **External ID**, **Phone Number**, **First Name**, and **Last Name** using SHA256 if the value is not already hashed. Supported fields include:
 
 - **Email** (`email_sha256`)
 - **External ID SHA256 Hashed** (`external_id_sha256`)
+- **Phone Number** (`phone_number_sha256`)
+- **First Name** (`first_name_sha256`)
+- **Last Name** (`last_name_sha256`)
 - **City** (`city`)
 - **ZIP Code** (`zip_code`)
+- **Region/State** (`region`)
 - **Country** (`country`)
 
 User data can be sourced from:
