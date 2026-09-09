@@ -211,7 +211,13 @@ function getUserData(data, isManualOrGCMConsentGranted, onDone) {
 }
 
 function hashDataIfNeeded(userData, onDone) {
-  const hashableKeys = ['email_sha256', 'external_id_sha256'];
+  const hashableKeys = [
+    'email_sha256',
+    'external_id_sha256',
+    'phone_number_sha256',
+    'first_name_sha256',
+    'last_name_sha256'
+  ];
   const fieldsToHash = {};
 
   hashableKeys.forEach((key) => {
@@ -304,6 +310,9 @@ function getEventUserDataEnhancement(isManualOrGCMConsentGranted) {
 function normalizeBasedOnSchemaKey(schemaKey, identifier) {
   if (schemaKey === 'email_sha256') return normalizeEmail(identifier);
   else if (schemaKey === 'external_id_sha256') return trim(identifier);
+  else if (schemaKey === 'phone_number_sha256') return normalizePhone(identifier);
+  else if (schemaKey === 'first_name_sha256' || schemaKey === 'last_name_sha256')
+    return normalizeName(identifier);
   else return identifier;
 }
 
@@ -401,6 +410,15 @@ function addUserData(userData, userDataFrom, useDL) {
       : undefined);
   if (externalId) userData.external_id_sha256 = externalId;
 
+  const phone = userDataFrom.phone_number || userDataFrom.phone || userDataFrom.ph;
+  if (phone) userData.phone_number_sha256 = phone;
+
+  const firstName = userDataFrom.first_name || userDataFrom.firstName || userDataFrom.fn;
+  if (firstName) userData.first_name_sha256 = firstName;
+
+  const lastName = userDataFrom.last_name || userDataFrom.lastName || userDataFrom.ln;
+  if (lastName) userData.last_name_sha256 = lastName;
+
   const city =
     userDataFrom.city ||
     userDataFrom.ct ||
@@ -435,6 +453,20 @@ function addUserData(userData, userDataFrom, useDL) {
       ? userDataFrom.address[0].country
       : undefined);
   if (country) userData.country = country;
+
+  const region =
+    userDataFrom.region ||
+    userDataFrom.state ||
+    userDataFrom.st ||
+    (userDataFrom.address && userDataFrom.address.region ? userDataFrom.address.region : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].region
+      ? userDataFrom.address[0].region
+      : undefined) ||
+    (userDataFrom.address && userDataFrom.address.state ? userDataFrom.address.state : undefined) ||
+    (userDataFrom.address && userDataFrom.address[0] && userDataFrom.address[0].state
+      ? userDataFrom.address[0].state
+      : undefined);
+  if (region) userData.region = region;
 
   return userData;
 }
@@ -619,6 +651,32 @@ function normalizeEmail(email) {
 function removeWhiteSpace(input) {
   if (!input) return;
   return makeString(input).split(' ').join('');
+}
+
+function normalizePhone(phone) {
+  if (!phone) return;
+  let value = makeString(phone);
+  [' ', '\t', '\n', '(', ')', '.', '-'].forEach((char) => {
+    value = value.split(char).join('');
+  });
+  if (value.charAt(0) === '+') value = value.substring(1);
+  while (value.length && value.charAt(0) === '0') value = value.substring(1);
+  return value;
+}
+
+function normalizeName(name) {
+  if (!name) return;
+  // ASCII whitespace and punctuation to strip; non-ASCII characters are preserved.
+  const charsToStrip = [
+    ' ', '\t', '\n', '\r',
+    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
+    ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
+  ];
+  let value = makeString(name).toLowerCase();
+  charsToStrip.forEach((char) => {
+    value = value.split(char).join('');
+  });
+  return value;
 }
 
 function trim(input) {
